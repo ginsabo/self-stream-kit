@@ -5,7 +5,7 @@
 [![Latest Release](https://img.shields.io/github/v/release/ginsabo/self-stream-kit?label=latest&style=flat-square)](https://github.com/ginsabo/self-stream-kit/releases/latest)
 [![GitHub Pages](https://img.shields.io/badge/Web-site-67e8c2?style=flat-square)](https://ginsabo.github.io/self-stream-kit/)
 
-[最新版をダウンロード](https://github.com/ginsabo/self-stream-kit/releases/latest) ・ [紹介ページを見る](https://ginsabo.github.io/self-stream-kit/) ・ [不具合・要望を報告](https://github.com/ginsabo/self-stream-kit/issues)
+[最新版をダウンロード](https://github.com/ginsabo/self-stream-kit/releases/latest) ・ [紹介ページを見る](https://ginsabo.github.io/self-stream-kit/) ・ [匿名で意見を送る](https://box.hat-work.com) ・ [GitHub Issues](https://github.com/ginsabo/self-stream-kit/issues)
 
 ## self-stream-kit とは
 
@@ -51,7 +51,8 @@
 | 紹介ページ | <https://ginsabo.github.io/self-stream-kit/> |
 | 最新版ダウンロード | <https://github.com/ginsabo/self-stream-kit/releases/latest> |
 | リリース一覧 | <https://github.com/ginsabo/self-stream-kit/releases> |
-| 不具合報告・機能要望 | <https://github.com/ginsabo/self-stream-kit/issues> |
+| 匿名の感想・気軽な要望 | <https://box.hat-work.com> |
+| 詳細な不具合報告・開発相談 | <https://github.com/ginsabo/self-stream-kit/issues> |
 
 ## このリポジトリについて
 
@@ -65,4 +66,14 @@ self-stream-kit/
 
 ## フィードバック
 
-不具合を見つけた場合や追加してほしい機能がある場合は、[GitHub Issues](https://github.com/ginsabo/self-stream-kit/issues)からお知らせください。報告時にWindowsのバージョン、再現手順、発生したメッセージを添えると、問題を確認しやすくなります。
+目的に合わせて、2つの窓口を利用できます。
+
+### 匿名ご意見ボックス
+
+「ちょっと気になった」「こんな機能がほしい」など、気軽に伝えたいときは[匿名ご意見ボックス](https://box.hat-work.com)をご利用ください。GitHubアカウントは必要ありません。
+
+### GitHub Issues
+
+不具合の経過を確認したいときや、開発者とやり取りしながら詳しく報告したいときは[GitHub Issues](https://github.com/ginsabo/self-stream-kit/issues)をご利用ください。Windowsのバージョン、再現手順、表示されたメッセージを添えると、問題を確認しやすくなります。
+
+どちらに送ればよいか迷った場合は、匿名ご意見ボックスで構いません。内容を確認し、必要に応じて開発用のIssueとして整理します。

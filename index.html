@@ -225,6 +225,46 @@
     .feature h3 { margin: 14px 0 8px; font-size: 20px; }
     .feature p { margin: 0; color: var(--muted); font-size: 15px; }
 
+    .feedback { padding: 0 0 120px; }
+
+    .feedback-intro {
+      max-width: 650px;
+      margin: -20px 0 32px;
+      color: var(--muted);
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .feedback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 245px;
+      padding: 30px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .feedback-card h3 { margin: 18px 0 8px; font-size: 22px; }
+    .feedback-card p { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+    .feedback-card .button { margin-top: auto; min-height: 46px; }
+
+    .tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      color: var(--accent);
+      background: rgba(103, 232, 194, .08);
+      border: 1px solid rgba(103, 232, 194, .2);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -244,7 +284,9 @@
       .node { width: 210px; padding: 18px; }
       .node-icon { margin-bottom: 22px; }
       .feature-grid { grid-template-columns: 1fr; }
+      .feedback-grid { grid-template-columns: 1fr; }
       .features { padding-bottom: 80px; }
+      .feedback { padding-bottom: 80px; }
     }
 
     @media (max-width: 430px) {
@@ -312,6 +354,26 @@
             <span class="feature-number">03</span>
             <h3>MediaMTXで配信管理</h3>
             <p>軽量なMediaMTXをストリーミングサーバーとして利用する構成です。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="feedback">
+        <p class="eyebrow">Feedback</p>
+        <h2 class="section-title">声を聞かせてください。</h2>
+        <p class="feedback-intro">気軽なひとことは匿名で、詳しい不具合報告はGitHubで。送りやすい窓口を選べます。迷ったときは匿名ご意見ボックスで構いません。</p>
+        <div class="feedback-grid">
+          <article class="feedback-card">
+            <span class="tag">アカウント不要</span>
+            <h3>匿名ご意見ボックス</h3>
+            <p>感想、ちょっとした疑問、「こんな機能がほしい」といった気軽な声はこちらへ。</p>
+            <a class="button button-primary" href="https://box.hat-work.com">匿名で送る <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="feedback-card">
+            <span class="tag">経過を確認できる</span>
+            <h3>GitHub Issues</h3>
+            <p>詳しい不具合報告や、やり取りしながら相談したい内容はこちらへ。</p>
+            <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/issues">Issueを作成する <span aria-hidden="true">↗</span></a>
           </article>
         </div>
       </section>
