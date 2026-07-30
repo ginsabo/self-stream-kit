@@ -417,31 +417,52 @@
       <section class="release" id="latest-update">
         <p class="eyebrow">Latest update</p>
         <div class="release-header">
-          <h2 class="section-title">最新版で、もっと分かりやすく。</h2>
-          <span class="release-date">2026年7月29日 更新</span>
+          <h2 class="section-title">止まりにくく、直しやすく。</h2>
+          <span class="release-date">2026年7月30日 更新</span>
         </div>
         <div class="release-grid">
           <article class="release-card">
-            <h3>再生中の視聴数</h3>
-            <p>実際に映像が流れているタブの数を表示。ページを閉じるとすぐに反映されます。</p>
+            <h3>更新できない問題を修正</h3>
+            <p><strong>更新する.bat</strong> が <code>'-NoProfile' is not recognized...</code> で止まる問題を修正しました。</p>
             <ul>
-              <li>0人の理由を管理画面で確認</li>
-              <li>取得失敗時は「取得できず」と明示</li>
+              <li>入口のファイルから日本語を除去</li>
+              <li>7月29日版で失敗した場合も再更新できます</li>
             </ul>
           </article>
           <article class="release-card">
-            <h3>固定URLの導入ガイド</h3>
-            <p>Cloudflareで独自ドメインを取得し、起動するたびに変わらないURLで配信する手順を追加しました。</p>
+            <h3>URLリンクと操作ボタン</h3>
+            <p>チャットと概要説明のWeb URL、あぷ小・あぷの画像名を安全にリンク化。別窓・全画面・シアターの操作ボタンは、必要なときだけ表示します。</p>
             <ul>
-              <li><strong>A：一時URL</strong> — すぐ使える</li>
-              <li><strong>B：固定URL</strong> — ドメインとトンネルを設定</li>
+              <li><strong>javascript:</strong> などはリンク化しません</li>
+              <li>タッチ画面ではボタンを常時表示</li>
             </ul>
+          </article>
+          <article class="release-card">
+            <h3>再生の自動復帰</h3>
+            <p>立て直しに失敗しても、60秒待って再試行します（最大3回）。ページを開き直さなくても復帰しやすくなりました。</p>
+          </article>
+          <article class="release-card">
+            <h3>短く、詳しい不具合報告</h3>
+            <p>報告文を約100〜150字に短縮。直近60秒の値の振れ幅も自動で付き、管理画面には数字の読み方を追加しました。</p>
           </article>
           <article class="release-card release-card-wide">
             <div>
-              <h3>7月27日版からの更新方法</h3>
+              <h3>困ったときの対処ガイド</h3>
+              <p>12の症状について「切り分け → 対処 → 視聴者への案内文」をまとめ、視聴者へそのまま送れる文面も6種類収録しました。</p>
+            </div>
+            <div>
+              <h3>そのほかの修正</h3>
+              <ul>
+                <li>MediaMTXのポート変更時に再生できない問題を修正</li>
+                <li>過去の報告番号を検索できるという誤記を修正</li>
+              </ul>
+            </div>
+          </article>
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>7月29日版からの更新方法</h3>
               <ol>
-                <li>配信を止める（キットの窓で <strong>Q</strong>、または <strong>2_配信をとめる.bat</strong>）</li>
+                <li><strong>2_配信をとめる.bat</strong> で配信を止める</li>
                 <li>「自鯖配信キット_更新」フォルダを配信キットのフォルダ内に置く</li>
                 <li><strong>更新する.bat</strong> を実行し、窓を閉じずに待つ</li>
                 <li>「Update completed」と表示されたら完了</li>
@@ -449,7 +470,7 @@
             </div>
             <div>
               <h3>設定はそのまま残ります</h3>
-              <p>設定、管理パスワード、通知先、リアクション素材、録画、コメント履歴、待機画面の画像、mediamtx.exeは引き継がれます。</p>
+              <p>設定、管理パスワード、通知先、リアクション素材、録画、コメント履歴、待機画面の画像は引き継がれます。</p>
               <p class="release-note">うまくいかないときは <strong>もとに戻す.bat</strong> で更新前の状態へ戻せます。</p>
             </div>
           </article>
