@@ -202,6 +202,59 @@
 
     .features { padding: 40px 0 120px; }
 
+    .release { padding: 0 0 120px; }
+
+    .release-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .release-header .section-title { margin-bottom: 0; }
+
+    .release-date {
+      flex: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .release-card {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .release-card h3 { margin: 0 0 12px; font-size: 21px; }
+    .release-card p { margin: 0; color: var(--muted); }
+    .release-card ul, .release-card ol { margin: 16px 0 0; padding-left: 1.4em; color: var(--muted); }
+    .release-card li + li { margin-top: 8px; }
+    .release-card strong { color: var(--text); }
+
+    .release-card-wide {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .release-note {
+      margin-top: 18px !important;
+      padding: 14px 16px;
+      color: var(--text) !important;
+      background: rgba(103, 232, 194, .08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+    }
+
     .section-title {
       margin: 0 0 36px;
       font-size: clamp(28px, 4vw, 42px);
@@ -285,7 +338,9 @@
       .node-icon { margin-bottom: 22px; }
       .feature-grid { grid-template-columns: 1fr; }
       .feedback-grid { grid-template-columns: 1fr; }
+      .release-grid, .release-card-wide { grid-template-columns: 1fr; }
       .features { padding-bottom: 80px; }
+      .release { padding-bottom: 80px; }
       .feedback { padding-bottom: 80px; }
     }
 
@@ -296,6 +351,7 @@
       .visual { min-height: 270px; }
       .node { width: 185px; }
       .node:last-child { bottom: 0; }
+      .release-header { align-items: start; flex-direction: column; }
       footer { flex-direction: column; }
     }
   </style>
@@ -354,6 +410,64 @@
             <span class="feature-number">03</span>
             <h3>MediaMTXで配信管理</h3>
             <p>軽量なMediaMTXをストリーミングサーバーとして利用する構成です。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="latest-update">
+        <p class="eyebrow">Latest update</p>
+        <div class="release-header">
+          <h2 class="section-title">最新版で、もっと分かりやすく。</h2>
+          <span class="release-date">2026年7月30日 更新</span>
+        </div>
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>更新できない不具合を修正</h3>
+            <p>7月29日版の <strong>更新する.bat</strong> が「'-NoProfile' is not recognized…」で止まる問題を修正しました。</p>
+            <ul>
+              <li>入口のファイルから日本語を除去</li>
+              <li>前回失敗した方も改めて更新可能</li>
+            </ul>
+          </article>
+          <article class="release-card">
+            <h3>URLを安全にリンク化</h3>
+            <p>チャットと概要説明のWeb URL、あぷ小・あぷのファイル名を押せるようにしました。</p>
+            <ul>
+              <li><strong>http://・https://</strong> に対応</li>
+              <li><strong>javascript:</strong> などはリンク化しない</li>
+            </ul>
+          </article>
+          <article class="release-card">
+            <h3>映像を邪魔しない操作ボタン</h3>
+            <p>PCの別窓・全画面・シアターでは、画面上部にマウスを乗せたときだけボタンを表示。タッチ画面では常に表示します。</p>
+          </article>
+          <article class="release-card">
+            <h3>止まった再生を自動で復旧</h3>
+            <p>立て直しに失敗した場合も、60秒後に再試行します。ページを開き直さず復帰できる機会が増えました。</p>
+          </article>
+          <article class="release-card">
+            <h3>短く、詳しい不具合報告</h3>
+            <p>約100〜150字へ短縮し、直近60秒の数値の振れ幅も記載。コメント欄の初期設定のまま貼れます。</p>
+          </article>
+          <article class="release-card">
+            <h3>配信者向けガイドを充実</h3>
+            <p>管理画面に診断値の読み方を追加し、12の症状を扱う「困ったときの対処ガイド.html」を同梱しました。</p>
+          </article>
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>7月29日版からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong> で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダを配信キットのフォルダ内に置く</li>
+                <li><strong>更新する.bat</strong> を実行し、窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+            </div>
+            <div>
+              <h3>設定はそのまま残ります</h3>
+              <p>設定、管理パスワード、通知先、リアクション素材、録画、コメント履歴、待機画面の画像は引き継がれます。</p>
+              <p class="release-note">うまくいかないときは <strong>もとに戻す.bat</strong> で更新前の状態へ戻せます。</p>
+            </div>
           </article>
         </div>
       </section>
