@@ -19,9 +19,7 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       min-width: 320px;
@@ -35,299 +33,68 @@
     }
 
     a { color: inherit; }
-
-    .container {
-      width: min(calc(100% - 40px), var(--max));
-      margin-inline: auto;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 76px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      font-weight: 750;
-      letter-spacing: -.02em;
-    }
-
-    .brand-mark {
-      display: grid;
-      width: 32px;
-      height: 32px;
-      place-items: center;
-      color: #06100d;
-      background: var(--accent);
-      border-radius: 9px;
-      font-size: 14px;
-    }
-
-    .repo-link {
-      color: var(--muted);
-      font-size: 14px;
-      text-decoration: none;
-    }
-
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    header { display: flex; align-items: center; justify-content: space-between; min-height: 76px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -.02em; }
+    .brand-mark { display: grid; width: 32px; height: 32px; place-items: center; color: #06100d; background: var(--accent); border-radius: 9px; font-size: 14px; }
+    .repo-link { color: var(--muted); font-size: 14px; text-decoration: none; }
     .repo-link:hover { color: var(--text); }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      align-items: center;
-      gap: 72px;
-      min-height: 620px;
-      padding-block: 80px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 20px;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 750;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      width: 7px;
-      height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 16px var(--accent);
-      content: "";
-    }
-
-    h1 {
-      max-width: 720px;
-      margin: 0;
-      font-size: clamp(42px, 7vw, 78px);
-      line-height: 1.08;
-      letter-spacing: -.055em;
-    }
-
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 72px; min-height: 620px; padding-block: 80px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; color: var(--accent); font-size: 13px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow::before { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 16px var(--accent); content: ""; }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(42px, 7vw, 78px); line-height: 1.08; letter-spacing: -.055em; }
     h1 span { color: var(--accent); }
-
-    .lead {
-      max-width: 630px;
-      margin: 28px 0 34px;
-      color: var(--muted);
-      font-size: clamp(17px, 2vw, 20px);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 52px;
-      padding: 0 22px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform .2s, border-color .2s, background .2s;
-    }
-
+    .lead { max-width: 630px; margin: 28px 0 34px; color: var(--muted); font-size: clamp(17px, 2vw, 20px); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 52px; padding: 0 22px; border: 1px solid var(--line); border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform .2s, border-color .2s, background .2s; }
     .button:hover { transform: translateY(-2px); }
-
-    .button-primary {
-      color: #04110d;
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 12px 40px rgba(61, 214, 170, .2);
-    }
-
+    .button-primary { color: #04110d; background: var(--accent); border-color: var(--accent); box-shadow: 0 12px 40px rgba(61, 214, 170, .2); }
     .button-primary:hover { background: var(--accent-strong); }
     .button-secondary:hover { border-color: rgba(255, 255, 255, .35); }
 
-    .visual {
-      position: relative;
-      min-height: 350px;
-    }
-
-    .node {
-      position: absolute;
-      width: min(240px, 68vw);
-      padding: 22px;
-      background: rgba(16, 22, 34, .92);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
-    }
-
+    .visual { position: relative; min-height: 350px; }
+    .node { position: absolute; width: min(240px, 68vw); padding: 22px; background: rgba(16, 22, 34, .92); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 80px rgba(0, 0, 0, .35); }
     .node:first-child { top: 5px; left: 0; }
     .node:last-child { right: 0; bottom: 15px; }
-
-    .node-icon {
-      display: grid;
-      width: 46px;
-      height: 46px;
-      margin-bottom: 36px;
-      place-items: center;
-      background: rgba(103, 232, 194, .1);
-      border: 1px solid rgba(103, 232, 194, .25);
-      border-radius: 13px;
-      color: var(--accent);
-      font-weight: 800;
-    }
-
+    .node-icon { display: grid; width: 46px; height: 46px; margin-bottom: 36px; place-items: center; background: rgba(103, 232, 194, .1); border: 1px solid rgba(103, 232, 194, .25); border-radius: 13px; color: var(--accent); font-weight: 800; }
     .node small { color: var(--muted); }
     .node strong { display: block; margin-top: 2px; font-size: 21px; }
-
-    .flow-line {
-      position: absolute;
-      top: 50%;
-      left: 22%;
-      width: 60%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      transform: rotate(29deg);
-      box-shadow: 0 0 12px var(--accent);
-    }
+    .flow-line { position: absolute; top: 50%; left: 22%; width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); transform: rotate(29deg); box-shadow: 0 0 12px var(--accent); }
 
     .features { padding: 40px 0 120px; }
+    .section-title { margin: 0 0 36px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.035em; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { padding: 28px; background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02)); border: 1px solid var(--line); border-radius: 16px; }
+    .feature-number { color: var(--accent); font-size: 13px; font-weight: 800; }
+    .feature h3 { margin: 14px 0 8px; font-size: 20px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
 
     .release { padding: 0 0 120px; }
-
-    .release-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 36px;
-    }
-
+    .release-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
     .release-header .section-title { margin-bottom: 0; }
-
-    .release-date {
-      flex: none;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .release-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .release-card {
-      padding: 28px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
+    .release-date { flex: none; color: var(--muted); font-size: 14px; }
+    .release-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .release-card { padding: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
     .release-card h3 { margin: 0 0 12px; font-size: 21px; }
     .release-card p { margin: 0; color: var(--muted); }
     .release-card ul, .release-card ol { margin: 16px 0 0; padding-left: 1.4em; color: var(--muted); }
     .release-card li + li { margin-top: 8px; }
     .release-card strong { color: var(--text); }
-
-    .release-card-wide {
-      display: grid;
-      grid-column: 1 / -1;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-
-    .release-note {
-      margin-top: 18px !important;
-      padding: 14px 16px;
-      color: var(--text) !important;
-      background: rgba(103, 232, 194, .08);
-      border-left: 3px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-    }
-
-    .section-title {
-      margin: 0 0 36px;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: -.035em;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      padding: 28px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02));
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
-    .feature-number { color: var(--accent); font-size: 13px; font-weight: 800; }
-    .feature h3 { margin: 14px 0 8px; font-size: 20px; }
-    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+    .release-card-wide { display: grid; grid-column: 1 / -1; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .release-note { margin-top: 18px !important; padding: 14px 16px; color: var(--text) !important; background: rgba(103, 232, 194, .08); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; }
 
     .feedback { padding: 0 0 120px; }
-
-    .feedback-intro {
-      max-width: 650px;
-      margin: -20px 0 32px;
-      color: var(--muted);
-    }
-
-    .feedback-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .feedback-card {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-height: 245px;
-      padding: 30px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-
+    .feedback-intro { max-width: 650px; margin: -20px 0 32px; color: var(--muted); }
+    .feedback-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .feedback-card { display: flex; flex-direction: column; align-items: flex-start; min-height: 245px; padding: 30px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
     .feedback-card h3 { margin: 18px 0 8px; font-size: 22px; }
     .feedback-card p { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
     .feedback-card .button { margin-top: auto; min-height: 46px; }
+    .tag { display: inline-flex; padding: 4px 10px; color: var(--accent); background: rgba(103, 232, 194, .08); border: 1px solid rgba(103, 232, 194, .2); border-radius: 999px; font-size: 12px; font-weight: 750; }
 
-    .tag {
-      display: inline-flex;
-      padding: 4px 10px;
-      color: var(--accent);
-      background: rgba(103, 232, 194, .08);
-      border: 1px solid rgba(103, 232, 194, .2);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      padding-block: 28px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
+    footer { display: flex; justify-content: space-between; gap: 24px; padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
     footer p { margin: 0; }
 
     @media (max-width: 760px) {
@@ -336,12 +103,8 @@
       .visual { min-height: 300px; }
       .node { width: 210px; padding: 18px; }
       .node-icon { margin-bottom: 22px; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .feedback-grid { grid-template-columns: 1fr; }
-      .release-grid, .release-card-wide { grid-template-columns: 1fr; }
-      .features { padding-bottom: 80px; }
-      .release { padding-bottom: 80px; }
-      .feedback { padding-bottom: 80px; }
+      .feature-grid, .feedback-grid, .release-grid, .release-card-wide { grid-template-columns: 1fr; }
+      .features, .release, .feedback { padding-bottom: 80px; }
     }
 
     @media (max-width: 430px) {
@@ -360,9 +123,7 @@
   <div class="container">
     <header>
       <div class="brand"><span class="brand-mark">S</span> self-stream-kit</div>
-      <a class="repo-link" href="https://github.com/ginsabo/self-stream-kit" aria-label="GitHubリポジトリを開く">
-        <span class="repo-label">GitHubで見る</span> ↗
-      </a>
+      <a class="repo-link" href="https://github.com/ginsabo/self-stream-kit" aria-label="GitHubリポジトリを開く"><span class="repo-label">GitHubで見る</span> ↗</a>
     </header>
 
     <main>
@@ -376,19 +137,10 @@
             <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit">GitHubリポジトリ <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-
         <div class="visual" aria-label="OBSからMediaMTXへ映像を配信する構成図">
           <div class="flow-line" aria-hidden="true"></div>
-          <div class="node">
-            <div class="node-icon">01</div>
-            <small>配信・録画</small>
-            <strong>OBS Studio</strong>
-          </div>
-          <div class="node">
-            <div class="node-icon">02</div>
-            <small>ストリーミングサーバー</small>
-            <strong>MediaMTX</strong>
-          </div>
+          <div class="node"><div class="node-icon">01</div><small>配信・録画</small><strong>OBS Studio</strong></div>
+          <div class="node"><div class="node-icon">02</div><small>ストリーミングサーバー</small><strong>MediaMTX</strong></div>
         </div>
       </section>
 
@@ -396,82 +148,58 @@
         <p class="eyebrow">Why self-stream-kit</p>
         <h2 class="section-title">必要なものを、シンプルに。</h2>
         <div class="feature-grid">
-          <article class="feature">
-            <span class="feature-number">01</span>
-            <h3>Windows向け</h3>
-            <p>Windows PCを使って、自宅に配信環境を用意したい人のためのキットです。</p>
-          </article>
-          <article class="feature">
-            <span class="feature-number">02</span>
-            <h3>OBSで配信</h3>
-            <p>使い慣れたOBS Studioから映像を送り、いつもの操作感で配信できます。</p>
-          </article>
-          <article class="feature">
-            <span class="feature-number">03</span>
-            <h3>MediaMTXで配信管理</h3>
-            <p>軽量なMediaMTXをストリーミングサーバーとして利用する構成です。</p>
-          </article>
+          <article class="feature"><span class="feature-number">01</span><h3>Windows向け</h3><p>Windows PCを使って、自宅に配信環境を用意したい人のためのキットです。</p></article>
+          <article class="feature"><span class="feature-number">02</span><h3>OBSで配信</h3><p>使い慣れたOBS Studioから映像を送り、いつもの操作感で配信できます。</p></article>
+          <article class="feature"><span class="feature-number">03</span><h3>MediaMTXで配信管理</h3><p>軽量なMediaMTXをストリーミングサーバーとして利用する構成です。</p></article>
         </div>
       </section>
 
       <section class="release" id="latest-update">
         <p class="eyebrow">Latest update</p>
         <div class="release-header">
-          <h2 class="section-title">止まりにくく、直しやすく。</h2>
-          <span class="release-date">2026年7月30日 更新</span>
+          <h2 class="section-title">配信ごとに、コメントを整理。</h2>
+          <span class="release-date">2026年8月4日 更新</span>
         </div>
         <div class="release-grid">
           <article class="release-card">
-            <h3>更新できない問題を修正</h3>
-            <p><strong>更新する.bat</strong> が <code>'-NoProfile' is not recognized...</code> で止まる問題を修正しました。</p>
-            <ul>
-              <li>入口のファイルから日本語を除去</li>
-              <li>7月29日版で失敗した場合も再更新できます</li>
-            </ul>
+            <h3>配信ごとのコメント履歴</h3>
+            <p>前回のコメントを次の配信へ残さず、1回の配信ごとに区切ります。過去ログは削除せず保存します。</p>
+            <ul><li>30秒以内の瞬断・Node再起動は同じ配信として復元</li><li>対応するアーカイブへコメントを表示</li></ul>
           </article>
           <article class="release-card">
-            <h3>URLリンクと操作ボタン</h3>
-            <p>チャットと概要説明のWeb URL、あぷ小・あぷの画像名を安全にリンク化。別窓・全画面・シアターの操作ボタンは、必要なときだけ表示します。</p>
-            <ul>
-              <li><strong>javascript:</strong> などはリンク化しません</li>
-              <li>タッチ画面ではボタンを常時表示</li>
-            </ul>
+            <h3>コメントのピン止め</h3>
+            <p>管理者が現在の配信中のコメントを1件だけ固定できます。アンケートと重ならず、チャット上部へ縦に並びます。</p>
+            <ul><li>削除・通報・配信終了時は自動解除</li><li>同じ配信中のNode再起動では復元</li></ul>
           </article>
           <article class="release-card">
-            <h3>再生の自動復帰</h3>
-            <p>立て直しに失敗しても、60秒待って再試行します（最大3回）。ページを開き直さなくても復帰しやすくなりました。</p>
+            <h3>Discord全員メンション</h3>
+            <p>管理画面で明示的に許可した場合だけ、通知文中の <code>@everyone</code> と <code>@here</code> を有効にできます。</p>
+            <ul><li>初期設定はOFF</li><li>ユーザー・ロールへの任意メンションは許可しません</li></ul>
           </article>
           <article class="release-card">
-            <h3>短く、詳しい不具合報告</h3>
-            <p>報告文を約100〜150字に短縮。直近60秒の値の振れ幅も自動で付き、管理画面には数字の読み方を追加しました。</p>
+            <h3>MediaMTXの復旧を改善</h3>
+            <p>MediaMTX差し替え後に画質選択が消える問題へ対応。起動時に設定を確認し、安全な不足項目だけをバックアップ付きで修復します。</p>
+            <ul><li>推奨・確認済みはv1.19.1</li><li>版番号だけを理由に画質を隠しません</li></ul>
           </article>
           <article class="release-card release-card-wide">
-            <div>
-              <h3>困ったときの対処ガイド</h3>
-              <p>12の症状について「切り分け → 対処 → 視聴者への案内文」をまとめ、視聴者へそのまま送れる文面も6種類収録しました。</p>
-            </div>
             <div>
               <h3>そのほかの修正</h3>
               <ul>
-                <li>MediaMTXのポート変更時に再生できない問題を修正</li>
-                <li>過去の報告番号を検索できるという誤記を修正</li>
+                <li>コメントログと集計の再起動復元を改善</li>
+                <li>部分書込み後は欠けた処理だけを再開</li>
+                <li>診断BATをCRLF・UTF-8 BOMなしへ修正</li>
+                <li>同梱テストを743件から764件へ増加</li>
               </ul>
             </div>
-          </article>
-          <article class="release-card release-card-wide">
             <div>
-              <h3>7月29日版からの更新方法</h3>
+              <h3>7月30日版からの更新方法</h3>
               <ol>
                 <li><strong>2_配信をとめる.bat</strong> で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダを配信キットのフォルダ内に置く</li>
+                <li>「自鯖配信キット_更新」フォルダを配信キット内に置く</li>
                 <li><strong>更新する.bat</strong> を実行し、窓を閉じずに待つ</li>
                 <li>「Update completed」と表示されたら完了</li>
               </ol>
-            </div>
-            <div>
-              <h3>設定はそのまま残ります</h3>
-              <p>設定、管理パスワード、通知先、リアクション素材、録画、コメント履歴、待機画面の画像は引き継がれます。</p>
-              <p class="release-note">うまくいかないときは <strong>もとに戻す.bat</strong> で更新前の状態へ戻せます。</p>
+              <p class="release-note">設定、パスワード、通知先、素材、録画、コメント履歴、待機画面、mediamtx.exeは引き継がれます。</p>
             </div>
           </article>
         </div>
@@ -480,28 +208,15 @@
       <section class="feedback">
         <p class="eyebrow">Feedback</p>
         <h2 class="section-title">声を聞かせてください。</h2>
-        <p class="feedback-intro">気軽なひとことは匿名で、詳しい不具合報告はGitHubで。送りやすい窓口を選べます。迷ったときは匿名ご意見ボックスで構いません。</p>
+        <p class="feedback-intro">気軽なひとことは匿名で、詳しい不具合報告はGitHubで。送りやすい窓口を選べます。</p>
         <div class="feedback-grid">
-          <article class="feedback-card">
-            <span class="tag">アカウント不要</span>
-            <h3>匿名ご意見ボックス</h3>
-            <p>感想、ちょっとした疑問、「こんな機能がほしい」といった気軽な声はこちらへ。</p>
-            <a class="button button-primary" href="https://box.hat-work.com">匿名で送る <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="feedback-card">
-            <span class="tag">経過を確認できる</span>
-            <h3>GitHub Issues</h3>
-            <p>詳しい不具合報告や、やり取りしながら相談したい内容はこちらへ。</p>
-            <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/issues">Issueを作成する <span aria-hidden="true">↗</span></a>
-          </article>
+          <article class="feedback-card"><span class="tag">アカウント不要</span><h3>匿名ご意見ボックス</h3><p>感想、ちょっとした疑問、「こんな機能がほしい」といった気軽な声はこちらへ。</p><a class="button button-primary" href="https://box.hat-work.com">匿名で送る <span aria-hidden="true">↗</span></a></article>
+          <article class="feedback-card"><span class="tag">経過を確認できる</span><h3>GitHub Issues</h3><p>詳しい不具合報告や、やり取りしながら相談したい内容はこちらへ。</p><a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/issues">Issueを作成する <span aria-hidden="true">↗</span></a></article>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p>self-stream-kit</p>
-      <p>OBS × MediaMTX × Windows</p>
-    </footer>
+    <footer><p>self-stream-kit</p><p>OBS × MediaMTX × Windows</p></footer>
   </div>
 </body>
 </html>
