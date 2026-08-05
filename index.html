@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="OBSとMediaMTXを使った、Windows向け自鯖配信キット。自分のPCから、自分だけの配信環境を始めよう。">
+  <meta name="description" content="OBS、MediaMTX、Node.jsを使ったWindows向け自鯖配信キット。コメント、リアクション、アーカイブ、安全な更新機能を備えています。">
   <title>self-stream-kit | Windows向け自鯖配信キット</title>
   <style>
     :root {
@@ -14,12 +14,14 @@
       --muted: #aab4c5;
       --accent: #67e8c2;
       --accent-strong: #3dd6aa;
+      --warning: #ffd479;
       --line: rgba(255, 255, 255, .1);
       --max: 1080px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       min-width: 320px;
@@ -34,77 +36,403 @@
 
     a { color: inherit; }
     code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
-    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
-    header { display: flex; align-items: center; justify-content: space-between; min-height: 76px; border-bottom: 1px solid var(--line); }
-    .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -.02em; }
-    .brand-mark { display: grid; width: 32px; height: 32px; place-items: center; color: #06100d; background: var(--accent); border-radius: 9px; font-size: 14px; }
-    .repo-link { color: var(--muted); font-size: 14px; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 750;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      color: #06100d;
+      background: var(--accent);
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .repo-link {
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
     .repo-link:hover { color: var(--text); }
 
-    .hero { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 72px; min-height: 620px; padding-block: 80px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; color: var(--accent); font-size: 13px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-    .eyebrow::before { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 16px var(--accent); content: ""; }
-    h1 { max-width: 720px; margin: 0; font-size: clamp(42px, 7vw, 78px); line-height: 1.08; letter-spacing: -.055em; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 72px;
+      min-height: 620px;
+      padding-block: 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 20px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 16px var(--accent);
+      content: "";
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 1.08;
+      letter-spacing: -.055em;
+    }
+
     h1 span { color: var(--accent); }
-    .lead { max-width: 630px; margin: 28px 0 34px; color: var(--muted); font-size: clamp(17px, 2vw, 20px); }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 52px; padding: 0 22px; border: 1px solid var(--line); border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform .2s, border-color .2s, background .2s; }
+
+    .lead {
+      max-width: 630px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+
     .button:hover { transform: translateY(-2px); }
-    .button-primary { color: #04110d; background: var(--accent); border-color: var(--accent); box-shadow: 0 12px 40px rgba(61, 214, 170, .2); }
+
+    .button-primary {
+      color: #04110d;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(61, 214, 170, .2);
+    }
+
     .button-primary:hover { background: var(--accent-strong); }
     .button-secondary:hover { border-color: rgba(255, 255, 255, .35); }
 
-    .visual { position: relative; min-height: 350px; }
-    .node { position: absolute; width: min(240px, 68vw); padding: 22px; background: rgba(16, 22, 34, .92); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 80px rgba(0, 0, 0, .35); }
-    .node:first-child { top: 5px; left: 0; }
-    .node:last-child { right: 0; bottom: 15px; }
-    .node-icon { display: grid; width: 46px; height: 46px; margin-bottom: 36px; place-items: center; background: rgba(103, 232, 194, .1); border: 1px solid rgba(103, 232, 194, .25); border-radius: 13px; color: var(--accent); font-weight: 800; }
+    .visual {
+      position: relative;
+      min-height: 350px;
+    }
+
+    .node {
+      position: absolute;
+      width: min(240px, 68vw);
+      padding: 22px;
+      background: rgba(16, 22, 34, .92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+    }
+
+    .node:first-child {
+      top: 5px;
+      left: 0;
+    }
+
+    .node:last-child {
+      right: 0;
+      bottom: 15px;
+    }
+
+    .node-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 36px;
+      place-items: center;
+      background: rgba(103, 232, 194, .1);
+      border: 1px solid rgba(103, 232, 194, .25);
+      border-radius: 13px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
     .node small { color: var(--muted); }
-    .node strong { display: block; margin-top: 2px; font-size: 21px; }
-    .flow-line { position: absolute; top: 50%; left: 22%; width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); transform: rotate(29deg); box-shadow: 0 0 12px var(--accent); }
 
-    .features { padding: 40px 0 120px; }
-    .section-title { margin: 0 0 36px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.035em; }
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .feature { padding: 28px; background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02)); border: 1px solid var(--line); border-radius: 16px; }
-    .feature-number { color: var(--accent); font-size: 13px; font-weight: 800; }
-    .feature h3 { margin: 14px 0 8px; font-size: 20px; }
-    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+    .node strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 21px;
+    }
 
-    .release { padding: 0 0 120px; }
-    .release-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+    .flow-line {
+      position: absolute;
+      top: 50%;
+      left: 22%;
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: rotate(29deg);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .features {
+      padding: 40px 0 120px;
+    }
+
+    .section-title {
+      margin: 0 0 36px;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -.035em;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 28px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .feature-number {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .feature h3 {
+      margin: 14px 0 8px;
+      font-size: 20px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .release {
+      padding: 0 0 120px;
+    }
+
+    .release-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
     .release-header .section-title { margin-bottom: 0; }
-    .release-date { flex: none; color: var(--muted); font-size: 14px; }
-    .release-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .release-card { padding: 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
-    .release-card h3 { margin: 0 0 12px; font-size: 21px; }
-    .release-card p { margin: 0; color: var(--muted); }
-    .release-card ul, .release-card ol { margin: 16px 0 0; padding-left: 1.4em; color: var(--muted); }
+
+    .release-date {
+      flex: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .release-alert {
+      margin: 0 0 24px;
+      padding: 16px 18px;
+      color: var(--text);
+      background: rgba(255, 212, 121, .08);
+      border: 1px solid rgba(255, 212, 121, .22);
+      border-left: 4px solid var(--warning);
+      border-radius: 10px;
+    }
+
+    .release-alert strong { color: var(--warning); }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .release-card {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .release-card h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .release-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .release-card ul,
+    .release-card ol {
+      margin: 16px 0 0;
+      padding-left: 1.4em;
+      color: var(--muted);
+    }
+
     .release-card li + li { margin-top: 8px; }
     .release-card strong { color: var(--text); }
-    .release-card-wide { display: grid; grid-column: 1 / -1; grid-template-columns: 1fr 1fr; gap: 32px; }
-    .release-note { margin-top: 18px !important; padding: 14px 16px; color: var(--text) !important; background: rgba(103, 232, 194, .08); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; }
 
-    .feedback { padding: 0 0 120px; }
-    .feedback-intro { max-width: 650px; margin: -20px 0 32px; color: var(--muted); }
-    .feedback-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .feedback-card { display: flex; flex-direction: column; align-items: flex-start; min-height: 245px; padding: 30px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
-    .feedback-card h3 { margin: 18px 0 8px; font-size: 22px; }
-    .feedback-card p { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
-    .feedback-card .button { margin-top: auto; min-height: 46px; }
-    .tag { display: inline-flex; padding: 4px 10px; color: var(--accent); background: rgba(103, 232, 194, .08); border: 1px solid rgba(103, 232, 194, .2); border-radius: 999px; font-size: 12px; font-weight: 750; }
+    .release-card-wide {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
 
-    footer { display: flex; justify-content: space-between; gap: 24px; padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .release-note {
+      margin-top: 18px !important;
+      padding: 14px 16px;
+      color: var(--text) !important;
+      background: rgba(103, 232, 194, .08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .feedback {
+      padding: 0 0 120px;
+    }
+
+    .feedback-intro {
+      max-width: 650px;
+      margin: -20px 0 32px;
+      color: var(--muted);
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .feedback-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 265px;
+      padding: 30px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .feedback-card h3 {
+      margin: 18px 0 8px;
+      font-size: 22px;
+    }
+
+    .feedback-card p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .feedback-card .button {
+      margin-top: auto;
+      min-height: 46px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      color: var(--accent);
+      background: rgba(103, 232, 194, .08);
+      border: 1px solid rgba(103, 232, 194, .2);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .security-note {
+      margin-top: 18px !important;
+      font-size: 13px !important;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     footer p { margin: 0; }
 
     @media (max-width: 760px) {
-      .container { width: min(calc(100% - 28px), var(--max)); }
-      .hero { grid-template-columns: 1fr; gap: 45px; min-height: auto; padding-block: 65px 80px; }
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        min-height: auto;
+        padding-block: 65px 80px;
+      }
+
       .visual { min-height: 300px; }
       .node { width: 210px; padding: 18px; }
       .node-icon { margin-bottom: 22px; }
-      .feature-grid, .feedback-grid, .release-grid, .release-card-wide { grid-template-columns: 1fr; }
-      .features, .release, .feedback { padding-bottom: 80px; }
+
+      .feature-grid,
+      .feedback-grid,
+      .release-grid,
+      .release-card-wide {
+        grid-template-columns: 1fr;
+      }
+
+      .features,
+      .release,
+      .feedback {
+        padding-bottom: 80px;
+      }
     }
 
     @media (max-width: 430px) {
@@ -114,7 +442,12 @@
       .visual { min-height: 270px; }
       .node { width: 185px; }
       .node:last-child { bottom: 0; }
-      .release-header { align-items: start; flex-direction: column; }
+
+      .release-header {
+        align-items: start;
+        flex-direction: column;
+      }
+
       footer { flex-direction: column; }
     }
   </style>
@@ -122,8 +455,13 @@
 <body>
   <div class="container">
     <header>
-      <div class="brand"><span class="brand-mark">S</span> self-stream-kit</div>
-      <a class="repo-link" href="https://github.com/ginsabo/self-stream-kit" aria-label="GitHubリポジトリを開く"><span class="repo-label">GitHubで見る</span> ↗</a>
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        self-stream-kit
+      </div>
+      <a class="repo-link" href="https://github.com/ginsabo/self-stream-kit" aria-label="GitHubリポジトリを開く">
+        <span class="repo-label">GitHubで見る</span> ↗
+      </a>
     </header>
 
     <main>
@@ -131,75 +469,278 @@
         <div>
           <p class="eyebrow">Stream on your own terms</p>
           <h1>自分のPCが、<br><span>配信サーバー</span>になる。</h1>
-          <p class="lead">OBSとMediaMTXを使った、Windows向け自鯖配信キット。いつもの配信環境から、自分で管理できるストリーミングを始められます。</p>
+          <p class="lead">
+            OBS、MediaMTX、Node.jsを使ったWindows向け自鯖配信キット。
+            映像、コメント、リアクション、アーカイブを、自分で管理できる環境から配信できます。
+          </p>
           <div class="actions">
-            <a class="button button-primary" href="https://github.com/ginsabo/self-stream-kit/releases/latest">最新版をダウンロード <span aria-hidden="true">↓</span></a>
-            <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit">GitHubリポジトリ <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="https://github.com/ginsabo/self-stream-kit/releases/latest">
+              最新版をダウンロード
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit">
+              GitHubリポジトリ
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
+
         <div class="visual" aria-label="OBSからMediaMTXへ映像を配信する構成図">
           <div class="flow-line" aria-hidden="true"></div>
-          <div class="node"><div class="node-icon">01</div><small>配信・録画</small><strong>OBS Studio</strong></div>
-          <div class="node"><div class="node-icon">02</div><small>ストリーミングサーバー</small><strong>MediaMTX</strong></div>
+          <div class="node">
+            <div class="node-icon">01</div>
+            <small>配信・録画</small>
+            <strong>OBS Studio</strong>
+          </div>
+          <div class="node">
+            <div class="node-icon">02</div>
+            <small>映像を受信・配信</small>
+            <strong>MediaMTX</strong>
+          </div>
         </div>
       </section>
 
       <section class="features">
         <p class="eyebrow">Why self-stream-kit</p>
-        <h2 class="section-title">必要なものを、シンプルに。</h2>
+        <h2 class="section-title">配信に必要なものを、ひとつのキットに。</h2>
+
         <div class="feature-grid">
-          <article class="feature"><span class="feature-number">01</span><h3>Windows向け</h3><p>Windows PCを使って、自宅に配信環境を用意したい人のためのキットです。</p></article>
-          <article class="feature"><span class="feature-number">02</span><h3>OBSで配信</h3><p>使い慣れたOBS Studioから映像を送り、いつもの操作感で配信できます。</p></article>
-          <article class="feature"><span class="feature-number">03</span><h3>MediaMTXで配信管理</h3><p>軽量なMediaMTXをストリーミングサーバーとして利用する構成です。</p></article>
+          <article class="feature">
+            <span class="feature-number">01</span>
+            <h3>Windows向け</h3>
+            <p>Windows PCを使って、自宅や自分のネットワーク上に配信環境を用意できます。</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">02</span>
+            <h3>OBSで配信</h3>
+            <p>使い慣れたOBS Studioから映像を送り、配信と録画を行えます。</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">03</span>
+            <h3>MediaMTXで映像管理</h3>
+            <p>軽量なMediaMTXを映像サーバーとして利用し、ブラウザへ配信します。</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">04</span>
+            <h3>コメントとリアクション</h3>
+            <p>コメント、そうだね、画像・動画・音声リアクション、落書きを利用できます。</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">05</span>
+            <h3>アーカイブと配信履歴</h3>
+            <p>配信ごとにコメントを分け、対応する録画とコメントを一緒に確認できます。</p>
+          </article>
+
+          <article class="feature">
+            <span class="feature-number">06</span>
+            <h3>安全な更新と復元</h3>
+            <p>設定や素材を保持したまま更新し、問題があれば更新前の状態へ戻せます。</p>
+          </article>
         </div>
       </section>
 
       <section class="release" id="latest-update">
         <p class="eyebrow">Latest update</p>
+
+        <div class="release-header">
+          <h2 class="section-title">起動と更新を、より安全に。</h2>
+          <span class="release-date">2026年8月5日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>2026年8月4日版をご利用の方へ：</strong>
+          ランチャーと更新処理に重要な修正が含まれています。2026年8月5日版への更新を推奨します。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>ランチャーの起動停止を修正</h3>
+            <p>
+              MediaMTX起動前にPowerShell関数が見つからず、ランチャーが停止する問題を修正しました。
+            </p>
+            <ul>
+              <li><code>Test-ExplicitLocalRtspRequested</code>を共有ライブラリへ統合</li>
+              <li>正常な<code>mediamtx.yml</code>を設定エラーとして扱う誤表示を解消</li>
+              <li>ランチャーと更新処理で同じ判定を使用</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>初回セットアップと更新を修正</h3>
+            <p>
+              Windowsによるアクセス権情報の正規化を、危険な権限変更として誤判定する問題を修正しました。
+            </p>
+            <ul>
+              <li>正常なMediaMTX設定で更新が停止する問題を解消</li>
+              <li>元の設定内容・属性・アクセス権をまとめて復元</li>
+              <li>失敗後に安全に再実行できる処理を維持</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>ピン止めを見つけやすく</h3>
+            <p>
+              管理画面の項目名を「最近のコメント・通報・ピン止め」へ変更しました。
+            </p>
+            <ul>
+              <li>現在の配信中コメントだけが対象であることを明記</li>
+              <li>配信停止中に操作できない理由を表示</li>
+              <li>現在のピン止め状態を常時確認可能</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>管理画面を折り畳み可能に</h3>
+            <p>
+              増えた設定項目を整理しやすいよう、管理画面の各カードへ共通の折り畳み機能を追加しました。
+            </p>
+            <ul>
+              <li><strong>▼</strong>と<strong>▶</strong>で開閉</li>
+              <li>折り畳んでも入力内容や設定値を保持</li>
+              <li>キーボード操作と読み上げ支援に対応</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>安全性とデータ整合性</h3>
+            <p>
+              公開API、管理パスワード、配信集計に関する問題を修正しました。
+            </p>
+            <ul>
+              <li>公開アーカイブがないセッションのコメント取得を拒否</li>
+              <li>管理パスワード消失時に既知の初期値へ戻らず安全停止</li>
+              <li>後から通報した際にリアクション件数が消える問題を修正</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>軽量化と処理の整理</h3>
+            <p>
+              コメント処理や配布ZIP生成で、重複・同期停止・不要ファイルを減らしました。
+            </p>
+            <ul>
+              <li>コメジェネXML書き込みを非同期化</li>
+              <li>待ち行列を最大256件に制限</li>
+              <li>配布ZIP生成処理を正式な経路へ一本化</li>
+              <li>古い未使用スクリプトを削除</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性を確認</h3>
+              <ul>
+                <li>2026年7月30日版の更新前テスト：743件すべて成功</li>
+                <li>2026年8月5日版への更新：成功</li>
+                <li>更新後テスト：770件すべて成功</li>
+                <li>設定・ログ・素材・アーカイブの差分：0</li>
+                <li>ロールバック後の管理コード・利用者データ差分：0</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境で実施しています。実OBS、実MediaMTX配信、実Cloudflare Tunnel、実スマートフォン、実Discord Webhookは利用者環境での確認が必要です。
+              </p>
+            </div>
+
+            <div>
+              <h3>7月30日版・8月4日版からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                設定、管理パスワード、Cloudflare設定、Discord設定、素材、録画、コメント履歴、待機画面、利用者独自画像、mediamtx.exeは引き継がれます。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
         <div class="release-header">
           <h2 class="section-title">配信ごとに、コメントを整理。</h2>
-          <span class="release-date">2026年8月4日 更新</span>
+          <span class="release-date">2026年8月4日 追加機能</span>
         </div>
+
         <div class="release-grid">
           <article class="release-card">
             <h3>配信ごとのコメント履歴</h3>
-            <p>前回のコメントを次の配信へ残さず、1回の配信ごとに区切ります。過去ログは削除せず保存します。</p>
-            <ul><li>30秒以内の瞬断・Node再起動は同じ配信として復元</li><li>対応するアーカイブへコメントを表示</li></ul>
+            <p>
+              前回のコメントを次の配信へ残さず、1回の配信ごとに区切ります。過去ログは削除せず保存します。
+            </p>
+            <ul>
+              <li>30秒以内の瞬断・Node.js再起動は同じ配信として復元</li>
+              <li>30秒を超えた停止後の再開は新しい配信として開始</li>
+              <li>対応するアーカイブへ配信中のコメントを表示</li>
+            </ul>
           </article>
+
           <article class="release-card">
             <h3>コメントのピン止め</h3>
-            <p>管理者が現在の配信中のコメントを1件だけ固定できます。アンケートと重ならず、チャット上部へ縦に並びます。</p>
-            <ul><li>削除・通報・配信終了時は自動解除</li><li>同じ配信中のNode再起動では復元</li></ul>
+            <p>
+              管理者が現在の配信中のコメントを1件だけチャット上部へ固定できます。
+            </p>
+            <ul>
+              <li>削除・通報・配信終了時は自動解除</li>
+              <li>次の配信へは持ち越しません</li>
+              <li>同じ配信中のNode.js再起動では復元</li>
+            </ul>
           </article>
+
           <article class="release-card">
             <h3>Discord全員メンション</h3>
-            <p>管理画面で明示的に許可した場合だけ、通知文中の <code>@everyone</code> と <code>@here</code> を有効にできます。</p>
-            <ul><li>初期設定はOFF</li><li>ユーザー・ロールへの任意メンションは許可しません</li></ul>
+            <p>
+              管理画面で明示的に許可した場合だけ、通知文中の
+              <code>@everyone</code>と<code>@here</code>を有効にできます。
+            </p>
+            <ul>
+              <li>初期設定はOFF</li>
+              <li>本文に書かれている場合だけ有効</li>
+              <li>ユーザー・ロールへの任意メンションは許可しません</li>
+            </ul>
           </article>
+
           <article class="release-card">
             <h3>MediaMTXの復旧を改善</h3>
-            <p>MediaMTX差し替え後に画質選択が消える問題へ対応。起動時に設定を確認し、安全な不足項目だけをバックアップ付きで修復します。</p>
-            <ul><li>推奨・確認済みはv1.19.1</li><li>版番号だけを理由に画質を隠しません</li></ul>
+            <p>
+              MediaMTX差し替え後に画質選択が消える問題へ対応し、起動時に設定と状態を再確認します。
+            </p>
+            <ul>
+              <li>推奨バージョンはv1.19.1</li>
+              <li>版番号だけを理由に画質を非表示にしません</li>
+              <li>不足している安全な設定だけをバックアップ付きで修復</li>
+            </ul>
           </article>
+
           <article class="release-card release-card-wide">
             <div>
-              <h3>そのほかの修正</h3>
-              <ul>
-                <li>コメントログと集計の再起動復元を改善</li>
-                <li>部分書込み後は欠けた処理だけを再開</li>
-                <li>診断BATをCRLF・UTF-8 BOMなしへ修正</li>
-                <li>同梱テストを743件から764件へ増加</li>
-              </ul>
-            </div>
-            <div>
-              <h3>7月30日版からの更新方法</h3>
+              <h3>アンケートとピン止め</h3>
+              <p>
+                チャット上部の固定表示エリアを共通化し、次の順番で縦に並べます。
+              </p>
               <ol>
-                <li><strong>2_配信をとめる.bat</strong> で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong> を実行し、窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
+                <li>アンケート</li>
+                <li>ピン止めコメント</li>
+                <li>通常コメント</li>
               </ol>
-              <p class="release-note">設定、パスワード、通知先、素材、録画、コメント履歴、待機画面、mediamtx.exeは引き継がれます。</p>
+            </div>
+
+            <div>
+              <h3>再起動時の復元</h3>
+              <ul>
+                <li>コメントログと集計の復元処理を改善</li>
+                <li>一部だけ書き込まれたログは欠けた処理だけを再開</li>
+                <li>診断BATをCRLF・UTF-8 BOMなしへ修正</li>
+                <li>不要になった処理と重複実装を整理</li>
+              </ul>
             </div>
           </article>
         </div>
@@ -208,15 +749,46 @@
       <section class="feedback">
         <p class="eyebrow">Feedback</p>
         <h2 class="section-title">声を聞かせてください。</h2>
-        <p class="feedback-intro">気軽なひとことは匿名で、詳しい不具合報告はGitHubで。送りやすい窓口を選べます。</p>
+
+        <p class="feedback-intro">
+          気軽なひとことは匿名で、詳しい不具合報告はGitHubで。送りやすい窓口を選べます。
+        </p>
+
         <div class="feedback-grid">
-          <article class="feedback-card"><span class="tag">アカウント不要</span><h3>匿名ご意見ボックス</h3><p>感想、ちょっとした疑問、「こんな機能がほしい」といった気軽な声はこちらへ。</p><a class="button button-primary" href="https://box.hat-work.com">匿名で送る <span aria-hidden="true">↗</span></a></article>
-          <article class="feedback-card"><span class="tag">経過を確認できる</span><h3>GitHub Issues</h3><p>詳しい不具合報告や、やり取りしながら相談したい内容はこちらへ。</p><a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/issues">Issueを作成する <span aria-hidden="true">↗</span></a></article>
+          <article class="feedback-card">
+            <span class="tag">アカウント不要</span>
+            <h3>匿名ご意見ボックス</h3>
+            <p>
+              感想、ちょっとした疑問、「こんな機能がほしい」といった気軽な声はこちらへ。
+            </p>
+            <a class="button button-primary" href="https://box.hat-work.com">
+              匿名で送る
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+          <article class="feedback-card">
+            <span class="tag">経過を確認できる</span>
+            <h3>GitHub Issues</h3>
+            <p>
+              再現手順がある不具合、ログを使った調査、具体的な改善提案はこちらへ。
+            </p>
+            <p class="security-note">
+              Webhook URL、管理パスワード、Cookie、秘密設定、生IP、Cloudflareの認証情報は掲載しないでください。
+            </p>
+            <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/issues">
+              Issueを作成する
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
         </div>
       </section>
     </main>
 
-    <footer><p>self-stream-kit</p><p>OBS × MediaMTX × Windows</p></footer>
+    <footer>
+      <p>self-stream-kit</p>
+      <p>OBS × MediaMTX × Node.js × Windows</p>
+    </footer>
   </div>
 </body>
 </html>
