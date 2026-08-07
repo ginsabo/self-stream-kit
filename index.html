@@ -334,6 +334,12 @@
       border-radius: 0 8px 8px 0;
     }
 
+    .release-archive-link {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .feedback {
       padding: 0 0 120px;
     }
@@ -547,14 +553,127 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
-          <h2 class="section-title">起動と更新を、より安全に。</h2>
-          <span class="release-date">2026年8月5日 更新</span>
+          <h2 class="section-title">見た目の崩れと、更新の詰まりをなくしました。</h2>
+          <span class="release-date">2026年8月7日 更新</span>
         </div>
 
         <p class="release-alert">
-          <strong>2026年8月4日版をご利用の方へ：</strong>
-          ランチャーと更新処理に重要な修正が含まれています。2026年8月5日版への更新を推奨します。
+          <strong>2026年8月5日版をご利用の方へ：</strong>
+          ピン止めコメント表示時に入力欄が隠れる問題と、更新が途中で止まる複数の不具合を修正しました。2026年8月7日版への更新を推奨します。
         </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>ピン止め表示で入力欄が隠れる問題を修正</h3>
+            <p>
+              長いコメントをピン止めして全文表示すると、コメント入力欄が画面の外へ押し出される問題を修正しました。
+            </p>
+            <ul>
+              <li>チャット上部の固定エリアに高さ上限と内部スクロールを追加</li>
+              <li>視聴ページと別窓チャットへ同じ表示制御を適用</li>
+              <li>スマートフォンの固定入力欄・幅の狭い別窓チャットでも操作範囲内に収まるよう修正</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>コメント文字数の上限を正しく反映</h3>
+            <p>
+              管理画面で設定した上限が視聴画面に反映されず、超過分が無言で切り捨てられる問題を修正しました。
+            </p>
+            <ul>
+              <li>設定した上限を視聴ページ・別窓チャットの入力欄へ反映</li>
+              <li>上限超過時はHTTP・WebSocketとも理由を表示して送信を拒否</li>
+              <li>無言での切り捨てを廃止</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>更新が途中で止まる問題を複数解消</h3>
+            <p>
+              環境によって更新が中止され、自動的に更新前の状態へ戻ってしまう問題を修正しました。
+            </p>
+            <ul>
+              <li>OBSプロファイルが無い環境、一部だけ変更した環境でも更新可能に</li>
+              <li><code>scripts</code>フォルダーへの追加ファイルが更新を妨げない</li>
+              <li>導入先の追加JS・CSS・独自テストが更新を妨げない</li>
+              <li>特定の文字コードによる配布直後だけの失敗を修正</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>更新結果の文字化けを解消</h3>
+            <p>
+              <code>APPLY_UPDATE.ps1</code>・<code>ROLLBACK_UPDATE.ps1</code>を直接実行した場合の日本語表示を修正しました。
+            </p>
+            <ul>
+              <li><strong>更新する.bat</strong>・<strong>もとに戻す.bat</strong>と同じ文字コード初期化を追加</li>
+              <li>PowerShellから直接実行しても日本語の結果を確認可能に</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>配布内容の確認をさらに強化</h3>
+            <p>
+              修正が一部の画面だけに反映されない事態や、配布物の欠落を防ぐ仕組みを追加しました。
+            </p>
+            <ul>
+              <li>全公開画面が同じ版の部品を読み込んでいるか自動確認</li>
+              <li>配布用・更新用・更新キットの3種ZIPすべてを相互照合</li>
+              <li>前回リリースとの差分から、廃止ファイルの分類漏れを自動検出</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>内部コードを整理</h3>
+            <p>
+              表には出ない部分の整理も行いました。
+            </p>
+            <ul>
+              <li>未使用の管理画面用CSSを削除</li>
+              <li>アーカイブ画面のID重複を解消</li>
+              <li>入力欄の処理を視聴ページ・別窓チャットで共通の部品へ統合</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性を確認</h3>
+              <ul>
+                <li>OBSプロファイルが無い2026年8月5日版環境への更新：成功</li>
+                <li>利用者追加ファイル・一部変更したOBSプロファイルがある環境への更新：成功</li>
+                <li>更新後テスト：787件すべて成功</li>
+                <li>管理コード・利用者データ・MediaMTX設定の差分：0</li>
+                <li>ロールバック：成功</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境で実施しています。実OBS、実MediaMTX配信、実Cloudflare Tunnel、実スマートフォン、実Discord Webhookは利用者環境での確認が必要です。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月5日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版・8月4日版・8月5日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
+          <h2 class="section-title">起動と更新を、より安全に。</h2>
+          <span class="release-date">2026年8月5日 更新</span>
+        </div>
 
         <div class="release-grid">
           <article class="release-card">
@@ -629,121 +748,11 @@
               <li>古い未使用スクリプトを削除</li>
             </ul>
           </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性を確認</h3>
-              <ul>
-                <li>2026年7月30日版の更新前テスト：743件すべて成功</li>
-                <li>2026年8月5日版への更新：成功</li>
-                <li>更新後テスト：770件すべて成功</li>
-                <li>設定・ログ・素材・アーカイブの差分：0</li>
-                <li>ロールバック後の管理コード・利用者データ差分：0</li>
-              </ul>
-              <p class="release-note">
-                確認は隔離したローカル環境で実施しています。実OBS、実MediaMTX配信、実Cloudflare Tunnel、実スマートフォン、実Discord Webhookは利用者環境での確認が必要です。
-              </p>
-            </div>
-
-            <div>
-              <h3>7月30日版・8月4日版からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                設定、管理パスワード、Cloudflare設定、Discord設定、素材、録画、コメント履歴、待機画面、利用者独自画像、mediamtx.exeは引き継がれます。
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">配信ごとに、コメントを整理。</h2>
-          <span class="release-date">2026年8月4日 追加機能</span>
         </div>
 
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>配信ごとのコメント履歴</h3>
-            <p>
-              前回のコメントを次の配信へ残さず、1回の配信ごとに区切ります。過去ログは削除せず保存します。
-            </p>
-            <ul>
-              <li>30秒以内の瞬断・Node.js再起動は同じ配信として復元</li>
-              <li>30秒を超えた停止後の再開は新しい配信として開始</li>
-              <li>対応するアーカイブへ配信中のコメントを表示</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>コメントのピン止め</h3>
-            <p>
-              管理者が現在の配信中のコメントを1件だけチャット上部へ固定できます。
-            </p>
-            <ul>
-              <li>削除・通報・配信終了時は自動解除</li>
-              <li>次の配信へは持ち越しません</li>
-              <li>同じ配信中のNode.js再起動では復元</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>Discord全員メンション</h3>
-            <p>
-              管理画面で明示的に許可した場合だけ、通知文中の
-              <code>@everyone</code>と<code>@here</code>を有効にできます。
-            </p>
-            <ul>
-              <li>初期設定はOFF</li>
-              <li>本文に書かれている場合だけ有効</li>
-              <li>ユーザー・ロールへの任意メンションは許可しません</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>MediaMTXの復旧を改善</h3>
-            <p>
-              MediaMTX差し替え後に画質選択が消える問題へ対応し、起動時に設定と状態を再確認します。
-            </p>
-            <ul>
-              <li>推奨バージョンはv1.19.1</li>
-              <li>版番号だけを理由に画質を非表示にしません</li>
-              <li>不足している安全な設定だけをバックアップ付きで修復</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>アンケートとピン止め</h3>
-              <p>
-                チャット上部の固定表示エリアを共通化し、次の順番で縦に並べます。
-              </p>
-              <ol>
-                <li>アンケート</li>
-                <li>ピン止めコメント</li>
-                <li>通常コメント</li>
-              </ol>
-            </div>
-
-            <div>
-              <h3>再起動時の復元</h3>
-              <ul>
-                <li>コメントログと集計の復元処理を改善</li>
-                <li>一部だけ書き込まれたログは欠けた処理だけを再開</li>
-                <li>診断BATをCRLF・UTF-8 BOMなしへ修正</li>
-                <li>不要になった処理と重複実装を整理</li>
-              </ul>
-            </div>
-          </article>
-        </div>
+        <p class="release-archive-link">
+          2026年8月4日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+        </p>
       </section>
 
       <section class="feedback">
