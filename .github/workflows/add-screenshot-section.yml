@@ -21,6 +21,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import textwrap
 
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
@@ -38,15 +39,8 @@ jobs:
               if not Path(image).is_file():
                   raise SystemExit(f'Missing screenshot: {image}')
 
-          css_anchor = '''    .feature p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 15px;
-          }
-
-          '''
-
-          css_insert = '''    .screenshots {
+          css = textwrap.indent(textwrap.dedent('''
+          .screenshots {
             padding: 0 0 120px;
           }
 
@@ -156,161 +150,132 @@ jobs:
             font-size: 14px;
           }
 
-          '''
+          @media (max-width: 760px) {
+            .screenshot-grid {
+              grid-template-columns: 1fr;
+            }
 
-          media_old = '''      .feature-grid,
-                .feedback-grid,
-                .release-grid,
-                .release-card-wide {
-                  grid-template-columns: 1fr;
-                }
+            .screenshot-grid .screenshot-card:last-child {
+              grid-column: auto;
+            }
 
-                .features,
-                .release,
-                .feedback {
-                  padding-bottom: 80px;
-                }
-          '''
+            .screenshot-main .screenshot-caption,
+            .screenshot-grid .screenshot-card:last-child .screenshot-caption {
+              grid-template-columns: 1fr;
+              gap: 10px;
+            }
 
-          media_new = '''      .feature-grid,
-                .feedback-grid,
-                .release-grid,
-                .release-card-wide,
-                .screenshot-grid {
-                  grid-template-columns: 1fr;
-                }
+            .screenshots {
+              padding-bottom: 80px;
+            }
+          }
+          ''').strip() + '\n\n', '    ')
 
-                .screenshot-grid .screenshot-card:last-child {
-                  grid-column: auto;
-                }
+          section = textwrap.indent(textwrap.dedent('''
+          <section class="screenshots" id="screenshots">
+            <p class="eyebrow">Screenshots</p>
+            <h2 class="section-title">実際の画面を見てみる。</h2>
 
-                .screenshot-main .screenshot-caption,
-                .screenshot-grid .screenshot-card:last-child .screenshot-caption {
-                  grid-template-columns: 1fr;
-                  gap: 10px;
-                }
+            <p class="screenshots-intro">
+              視聴者が使う配信ページと、配信者が使う管理画面です。
+              配信中の操作からコメント・リアクション・アンケートなどの設定まで、ブラウザ上でまとめて扱えます。
+              画像をクリックすると原寸で確認できます。
+            </p>
 
-                .features,
-                .release,
-                .feedback,
-                .screenshots {
-                  padding-bottom: 80px;
-                }
-          '''
+            <figure class="screenshot-card screenshot-main">
+              <a class="screenshot-link" href="./images/screenshots/viewer.png" target="_blank" rel="noopener">
+                <img
+                  src="./images/screenshots/viewer.png"
+                  alt="チャット、リアクション、落書き機能を表示した自鯖配信キットの視聴ページ"
+                  loading="lazy"
+                >
+              </a>
+              <figcaption class="screenshot-caption">
+                <div class="screenshot-heading">
+                  <span class="screenshot-type">視聴者向け</span>
+                  <h3>視聴ページ</h3>
+                </div>
+                <p>
+                  チャット、画像・音声・動画リアクション、落書き、画質切替、スクリーンショット、
+                  アーカイブなど、配信を見るための機能をひとつの画面にまとめています。
+                </p>
+              </figcaption>
+            </figure>
 
-          html_anchor = '''      </section>
-
-                <section class="release" id="latest-update">
-          '''
-
-          html_insert = '''      </section>
-
-                <section class="screenshots" id="screenshots">
-                  <p class="eyebrow">Screenshots</p>
-                  <h2 class="section-title">実際の画面を見てみる。</h2>
-
-                  <p class="screenshots-intro">
-                    視聴者が使う配信ページと、配信者が使う管理画面です。
-                    配信中の操作からコメント・リアクション・アンケートなどの設定まで、ブラウザ上でまとめて扱えます。
-                    画像をクリックすると原寸で確認できます。
-                  </p>
-
-                  <figure class="screenshot-card screenshot-main">
-                    <a class="screenshot-link" href="./images/screenshots/viewer.png" target="_blank" rel="noopener">
-                      <img
-                        src="./images/screenshots/viewer.png"
-                        alt="チャット、リアクション、落書き機能を表示した自鯖配信キットの視聴ページ"
-                        loading="lazy"
-                      >
-                    </a>
-                    <figcaption class="screenshot-caption">
-                      <div class="screenshot-heading">
-                        <span class="screenshot-type">視聴者向け</span>
-                        <h3>視聴ページ</h3>
-                      </div>
-                      <p>
-                        チャット、画像・音声・動画リアクション、落書き、画質切替、スクリーンショット、
-                        アーカイブなど、配信を見るための機能をひとつの画面にまとめています。
-                      </p>
-                    </figcaption>
-                  </figure>
-
-                  <div class="screenshot-grid">
-                    <figure class="screenshot-card">
-                      <a class="screenshot-link" href="./images/screenshots/admin-control.jpg" target="_blank" rel="noopener">
-                        <img
-                          src="./images/screenshots/admin-control.jpg"
-                          alt="自鯖配信キットの配信操作管理画面"
-                          loading="lazy"
-                        >
-                      </a>
-                      <figcaption class="screenshot-caption">
-                        <div class="screenshot-heading">
-                          <span class="screenshot-type">管理者向け</span>
-                          <h3>配信操作</h3>
-                        </div>
-                        <p>
-                          配信状態や再生中の視聴数を確認しながら、タイトル・説明の簡易編集や、
-                          落書き機能の切り替えなどを行えます。
-                        </p>
-                      </figcaption>
-                    </figure>
-
-                    <figure class="screenshot-card">
-                      <a class="screenshot-link" href="./images/screenshots/admin-viewers.jpg" target="_blank" rel="noopener">
-                        <img
-                          src="./images/screenshots/admin-viewers.jpg"
-                          alt="自鯖配信キットの視聴者設定管理画面"
-                          loading="lazy"
-                        >
-                      </a>
-                      <figcaption class="screenshot-caption">
-                        <div class="screenshot-heading">
-                          <span class="screenshot-type">管理者向け</span>
-                          <h3>視聴者設定</h3>
-                        </div>
-                        <p>
-                          接続人数の上限、コメント制限、アンケート、リアクションなど、
-                          視聴者が利用できる機能をまとめて設定できます。
-                        </p>
-                      </figcaption>
-                    </figure>
-
-                    <figure class="screenshot-card">
-                      <a class="screenshot-link" href="./images/screenshots/admin-page.jpg" target="_blank" rel="noopener">
-                        <img
-                          src="./images/screenshots/admin-page.jpg"
-                          alt="自鯖配信キットの配信ページ設定管理画面"
-                          loading="lazy"
-                        >
-                      </a>
-                      <figcaption class="screenshot-caption">
-                        <div class="screenshot-heading">
-                          <span class="screenshot-type">管理者向け</span>
-                          <h3>配信ページ設定</h3>
-                        </div>
-                        <p>
-                          サイト名、配信タイトル、説明、サムネイル、オフライン画像、公開URLなど、
-                          視聴ページの見た目と基本情報を管理できます。
-                        </p>
-                      </figcaption>
-                    </figure>
+            <div class="screenshot-grid">
+              <figure class="screenshot-card">
+                <a class="screenshot-link" href="./images/screenshots/admin-control.jpg" target="_blank" rel="noopener">
+                  <img
+                    src="./images/screenshots/admin-control.jpg"
+                    alt="自鯖配信キットの配信操作管理画面"
+                    loading="lazy"
+                  >
+                </a>
+                <figcaption class="screenshot-caption">
+                  <div class="screenshot-heading">
+                    <span class="screenshot-type">管理者向け</span>
+                    <h3>配信操作</h3>
                   </div>
-                </section>
+                  <p>
+                    配信状態や再生中の視聴数を確認しながら、タイトル・説明の簡易編集や、
+                    落書き機能の切り替えなどを行えます。
+                  </p>
+                </figcaption>
+              </figure>
 
-                <section class="release" id="latest-update">
-          '''
+              <figure class="screenshot-card">
+                <a class="screenshot-link" href="./images/screenshots/admin-viewers.jpg" target="_blank" rel="noopener">
+                  <img
+                    src="./images/screenshots/admin-viewers.jpg"
+                    alt="自鯖配信キットの視聴者設定管理画面"
+                    loading="lazy"
+                  >
+                </a>
+                <figcaption class="screenshot-caption">
+                  <div class="screenshot-heading">
+                    <span class="screenshot-type">管理者向け</span>
+                    <h3>視聴者設定</h3>
+                  </div>
+                  <p>
+                    接続人数の上限、コメント制限、アンケート、リアクションなど、
+                    視聴者が利用できる機能をまとめて設定できます。
+                  </p>
+                </figcaption>
+              </figure>
+
+              <figure class="screenshot-card">
+                <a class="screenshot-link" href="./images/screenshots/admin-page.jpg" target="_blank" rel="noopener">
+                  <img
+                    src="./images/screenshots/admin-page.jpg"
+                    alt="自鯖配信キットの配信ページ設定管理画面"
+                    loading="lazy"
+                  >
+                </a>
+                <figcaption class="screenshot-caption">
+                  <div class="screenshot-heading">
+                    <span class="screenshot-type">管理者向け</span>
+                    <h3>配信ページ設定</h3>
+                  </div>
+                  <p>
+                    サイト名、配信タイトル、説明、サムネイル、オフライン画像、公開URLなど、
+                    視聴ページの見た目と基本情報を管理できます。
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          ''').strip() + '\n\n', '      ')
+
+          css_anchor = '    .release {\n'
+          html_anchor = '      <section class="release" id="latest-update">\n'
 
           if css_anchor not in s:
-              raise SystemExit('CSS anchor not found')
-          if media_old not in s:
-              raise SystemExit('Responsive CSS anchor not found')
+              raise SystemExit('CSS insertion point not found')
           if html_anchor not in s:
-              raise SystemExit('HTML anchor not found')
+              raise SystemExit('HTML insertion point not found')
 
-          s = s.replace(css_anchor, css_anchor + css_insert, 1)
-          s = s.replace(media_old, media_new, 1)
-          s = s.replace(html_anchor, html_insert, 1)
+          s = s.replace(css_anchor, css + css_anchor, 1)
+          s = s.replace(html_anchor, section + html_anchor, 1)
 
           for ref in (
               './images/screenshots/viewer.png',
