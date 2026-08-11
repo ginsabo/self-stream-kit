@@ -776,6 +776,123 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">回線に合わせて、画質が自動で切り替わります。</h2>
+          <span class="release-date">2026年8月11日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>すべての版をご利用の方へ：</strong>
+          視聴画質の自動切替（ABR）の追加をはじめ、再生の立て直し・エコー対策・導入の自動化など大きな改善を行いました。2026年8月11日版への更新を推奨します。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>自動画質（ABR）を追加</h3>
+            <p>
+              H264配信で画質「自動」を選ぶと、視聴者ごとの回線の太さに合わせて高画質と軽画質を自動で行き来します。
+            </p>
+            <ul>
+              <li>回線が細くなると自動で軽画質へ、回復すると自動で高画質へ</li>
+              <li>視聴者の操作は不要。切替はほとんど気づかれません</li>
+              <li>対象は「低画質の生成」ONのH264配信。HEVC配信は従来の自動選択</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>MediaMTXを自動で用意</h3>
+            <p>
+              FFmpegと同じように、MediaMTXも番号batで自動導入できるようになりました。
+            </p>
+            <ul>
+              <li><strong>5_MediaMTXを用意する.bat</strong>が動作確認済みの版を自動導入</li>
+              <li>既存の設定（mediamtx.yml）は決して上書きしない</li>
+              <li>壊れたexe・設定だけが消えた環境も自動で修復</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>再生の立て直しを強化</h3>
+            <p>
+              視聴が苦しくなったときに、ぐるぐるを見せ続けない仕組みを追加しました。
+            </p>
+            <ul>
+              <li>音は流れるのに映像だけ凍る故障を自動検出し、3段階で自動復旧</li>
+              <li>読み込みが追いつかない視聴者を自動で一段軽い画質へ</li>
+              <li>映像の保持時間を約7秒から約20秒へ拡大</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>読み込みと画質切替を高速化</h3>
+            <p>
+              「再接続を押した方が早い」と言われる待ち時間をなくしました。
+            </p>
+            <ul>
+              <li>読み込みの再試行間隔を短縮（0.5〜2秒で粘る方式へ）</li>
+              <li>軽画質への切替は変換の準備完了を待ってから実行（切替失敗で元へ戻される問題を解消）</li>
+              <li>配信開始直後に画質が勝手に切り替わる問題を修正</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>エコー対策</h3>
+            <p>
+              「音が二重に聞こえる」報告の原因を2系統とも塞ぎました。
+            </p>
+            <ul>
+              <li>ポップアップ視聴時は元ページの再生を自動停止（二重再生を解消）</li>
+              <li>OBSが音声を複数トラックで送っている場合は管理画面へ警告</li>
+              <li>チャットの受付を一時停止できる機能も追加</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>画面と説明書の改善</h3>
+            <p>
+              細かな引っかかりも合わせて解消しました。
+            </p>
+            <ul>
+              <li>ウィンドウ内全画面でも画質メニュー・落書き・スクショを利用可能に</li>
+              <li>全画面・シアター切替後にツールバーが消えなくなる問題を修正</li>
+              <li>更新手順の説明を<strong>更新する.bat</strong>へ統一。publicフォルダーが公開される旨や、独自追加ファイルの更新時の扱いも明記</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：832件すべて成功</li>
+                <li>外部AI監査を3巡実施し、指摘（High 1件・Medium 10件）をすべて修正</li>
+                <li>最終監査判定：「Critical 0 / High 0 / Medium 0・配布可」</li>
+                <li>ロールバック：成功</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境に加え、実OBS・実MediaMTX・実スマートフォンを使った配信者の実環境でも実施しています。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月7日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜8月7日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">見た目の崩れと、更新の詰まりをなくしました。</h2>
           <span class="release-date">2026年8月7日 更新</span>
         </div>
@@ -888,95 +1005,12 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">起動と更新を、より安全に。</h2>
-          <span class="release-date">2026年8月5日 更新</span>
-        </div>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>ランチャーの起動停止を修正</h3>
-            <p>
-              MediaMTX起動前にPowerShell関数が見つからず、ランチャーが停止する問題を修正しました。
-            </p>
-            <ul>
-              <li><code>Test-ExplicitLocalRtspRequested</code>を共有ライブラリへ統合</li>
-              <li>正常な<code>mediamtx.yml</code>を設定エラーとして扱う誤表示を解消</li>
-              <li>ランチャーと更新処理で同じ判定を使用</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>初回セットアップと更新を修正</h3>
-            <p>
-              Windowsによるアクセス権情報の正規化を、危険な権限変更として誤判定する問題を修正しました。
-            </p>
-            <ul>
-              <li>正常なMediaMTX設定で更新が停止する問題を解消</li>
-              <li>元の設定内容・属性・アクセス権をまとめて復元</li>
-              <li>失敗後に安全に再実行できる処理を維持</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>ピン止めを見つけやすく</h3>
-            <p>
-              管理画面の項目名を「最近のコメント・通報・ピン止め」へ変更しました。
-            </p>
-            <ul>
-              <li>現在の配信中コメントだけが対象であることを明記</li>
-              <li>配信停止中に操作できない理由を表示</li>
-              <li>現在のピン止め状態を常時確認可能</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>管理画面を折り畳み可能に</h3>
-            <p>
-              増えた設定項目を整理しやすいよう、管理画面の各カードへ共通の折り畳み機能を追加しました。
-            </p>
-            <ul>
-              <li><strong>▼</strong>と<strong>▶</strong>で開閉</li>
-              <li>折り畳んでも入力内容や設定値を保持</li>
-              <li>キーボード操作と読み上げ支援に対応</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>安全性とデータ整合性</h3>
-            <p>
-              公開API、管理パスワード、配信集計に関する問題を修正しました。
-            </p>
-            <ul>
-              <li>公開アーカイブがないセッションのコメント取得を拒否</li>
-              <li>管理パスワード消失時に既知の初期値へ戻らず安全停止</li>
-              <li>後から通報した際にリアクション件数が消える問題を修正</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>軽量化と処理の整理</h3>
-            <p>
-              コメント処理や配布ZIP生成で、重複・同期停止・不要ファイルを減らしました。
-            </p>
-            <ul>
-              <li>コメジェネXML書き込みを非同期化</li>
-              <li>待ち行列を最大256件に制限</li>
-              <li>配布ZIP生成処理を正式な経路へ一本化</li>
-              <li>古い未使用スクリプトを削除</li>
-            </ul>
-          </article>
-        </div>
-
         <p class="release-archive-link">
-          2026年8月4日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月5日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
+
+
 
       <section class="feedback">
         <p class="eyebrow">Feedback</p>
