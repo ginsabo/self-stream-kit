@@ -1017,12 +1017,17 @@
 
         <div class="release-header">
           <h2 class="section-title">協力者のPCから、映像だけをミラー配信。</h2>
-          <span class="release-date">2026年8月12日 公開</span>
+          <span class="release-date">2026年8月13日 更新</span>
         </div>
 
         <p class="feedback-intro">
           簡易自鯖ミラーツールは、自鯖配信キットの映像を協力者のPCから再配信して、配信元の回線負荷を分散する補助ツールです。
           配信者から「配信元URL」と「ミラー用合鍵」を受け取った協力者が、自分のPCでミラーを立てられます。
+        </p>
+
+        <p class="release-alert">
+          <strong>旧版を導入済みの方へ：</strong>
+          2026年8月13日にZIPを差し替えました。ハードウェア変換が使えないPCでのHEVC中継の安定化（自動軽量変換）、変換方式の判定表示、ウィンドウを閉じたときにプロセスが残る問題の対策を含みます。再ダウンロードして展開し直し、<strong>0_初回準備.bat</strong>から実行してください。
         </p>
 
         <div class="release-grid">
@@ -1034,7 +1039,8 @@
             <ul>
               <li>初回準備のあとはBATを起動して、配信元URLと合鍵を入れるだけ</li>
               <li>起動のたびに無料の一時URL（trycloudflare.com）を自動発行</li>
-              <li>H.264はそのまま中継、HEVCは自動でH.264へ変換</li>
+              <li>H.264はそのまま中継、HEVCはNVIDIA / Intel / AMDで自動変換</li>
+              <li>ハードウェア変換が無いPCでは720p/30fpsの軽量変換に自動で切り替え、非力なPCでも中継が追いつきます</li>
               <li>配信キット本体と同じPCでも併用できます</li>
             </ul>
           </article>
@@ -1084,7 +1090,8 @@
                 <h3>ミラー管理画面</h3>
               </div>
               <p>
-                配信元URLと合鍵を入れて「保存してミラー開始」を押すだけ。視聴者に渡すURLもここからコピーできます。
+                配信元URLと合鍵を入れて「保存してミラー開始」を押すだけ。視聴者に渡すURLのコピーや、
+                どの変換方式（NVIDIA / Intel / AMD / CPU軽量）が使えたかの判定確認もここからできます。
               </p>
             </figcaption>
           </figure>
