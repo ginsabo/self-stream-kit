@@ -1012,6 +1012,96 @@
 
 
 
+      <section class="release" id="mirror-tool">
+        <p class="eyebrow">Mirror tool</p>
+
+        <div class="release-header">
+          <h2 class="section-title">協力者のPCから、映像だけをミラー配信。</h2>
+          <span class="release-date">2026年8月12日 公開</span>
+        </div>
+
+        <p class="feedback-intro">
+          簡易自鯖ミラーツールは、自鯖配信キットの映像を協力者のPCから再配信して、配信元の回線負荷を分散する補助ツールです。
+          配信者から「配信元URL」と「ミラー用合鍵」を受け取った協力者が、自分のPCでミラーを立てられます。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>協力者の準備は最小限</h3>
+            <p>
+              独自ドメイン、Cloudflareアカウント、ルーターのポート開放は不要です。
+            </p>
+            <ul>
+              <li>初回準備のあとはBATを起動して、配信元URLと合鍵を入れるだけ</li>
+              <li>起動のたびに無料の一時URL（trycloudflare.com）を自動発行</li>
+              <li>H.264はそのまま中継、HEVCは自動でH.264へ変換</li>
+              <li>配信キット本体と同じPCでも併用できます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>用途と注意</h3>
+            <p>
+              中継するのは映像だけです。コメントやリアクションは配信元ページで行います。
+            </p>
+            <ul>
+              <li>公開URLは起動ごとに変わり、停止すると使えなくなります</li>
+              <li>常設・大人数向けではなく、少人数の一時的な協力を想定しています</li>
+              <li>対応する配信元は2026年7月30日版以降の自鯖配信キットです</li>
+            </ul>
+          </article>
+
+          <figure class="screenshot-card">
+            <a class="screenshot-link" href="./images/screenshots/mirror-viewer.png" target="_blank" rel="noopener">
+              <img
+                src="./images/screenshots/mirror-viewer.png"
+                alt="テスト映像を中継中の簡易ミラー視聴ページ"
+                loading="lazy"
+              >
+            </a>
+            <figcaption class="screenshot-caption">
+              <div class="screenshot-heading">
+                <span class="screenshot-type">視聴者向け</span>
+                <h3>ミラー視聴ページ</h3>
+              </div>
+              <p>
+                映像と配信元へのリンクだけの最小構成です。画面はテスト映像を中継したサンプルです。
+              </p>
+            </figcaption>
+          </figure>
+
+          <figure class="screenshot-card">
+            <a class="screenshot-link" href="./images/screenshots/mirror-admin.png" target="_blank" rel="noopener">
+              <img
+                src="./images/screenshots/mirror-admin.png"
+                alt="ミラー中の簡易ミラー管理画面"
+                loading="lazy"
+              >
+            </a>
+            <figcaption class="screenshot-caption">
+              <div class="screenshot-heading">
+                <span class="screenshot-type">協力者向け</span>
+                <h3>ミラー管理画面</h3>
+              </div>
+              <p>
+                配信元URLと合鍵を入れて「保存してミラー開始」を押すだけ。視聴者に渡すURLもここからコピーできます。
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="actions" style="margin-top: 28px;">
+          <a class="button button-primary" href="https://github.com/ginsabo/self-stream-kit/releases/download/mirror-v2026.0812/self-stream-mirror_20260812.zip">
+            ミラーツールをダウンロード
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a class="button button-secondary" href="https://github.com/ginsabo/self-stream-kit/releases/tag/mirror-v2026.0812">
+            使い方とSHA-256を見る
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
       <section class="feedback">
         <p class="eyebrow">Feedback</p>
         <h2 class="section-title">声を聞かせてください。</h2>
