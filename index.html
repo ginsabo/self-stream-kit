@@ -586,9 +586,104 @@
 
       footer { flex-direction: column; }
     }
+
+    /* ページ内目次。縦に長いページを、左の一覧から一気に飛べるようにする。 */
+    .page-toc {
+      position: fixed;
+      top: 50%;
+      left: 16px;
+      transform: translateY(-50%);
+      z-index: 60;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 176px;
+      padding: 10px;
+      background: rgba(16, 22, 34, .94);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .page-toc-title {
+      margin: 2px 10px 6px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .page-toc a {
+      display: block;
+      padding: 6px 10px;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .page-toc a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .page-toc a.is-current {
+      color: var(--accent);
+      background: rgba(103, 232, 194, .08);
+      border-left-color: var(--accent);
+    }
+
+    /* 目次が本文と重ならない幅がある時だけ、常時表示する。 */
+    @media (min-width: 1440px) {
+      .page-toc { display: flex; }
+      .page-toc-toggle { display: none; }
+    }
+
+    /* 狭い画面では左下のボタンで開閉する。 */
+    .page-toc-toggle {
+      position: fixed;
+      bottom: 18px;
+      left: 16px;
+      z-index: 61;
+      padding: 10px 16px;
+      color: var(--text);
+      background: rgba(16, 22, 34, .94);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .page-toc-toggle:hover { border-color: var(--accent); }
+
+    body.toc-open .page-toc {
+      display: flex;
+      top: auto;
+      bottom: 66px;
+      transform: none;
+    }
+
+    /* 見出しへ飛んだ時に、画面の端へ張り付かないよう少し余白を取る。 */
+    main section { scroll-margin-top: 20px; }
   </style>
 </head>
 <body>
+  <nav class="page-toc" id="pageToc" aria-label="ページ内目次">
+    <span class="page-toc-title">目次</span>
+    <a href="#top">トップ</a>
+    <a href="#features">キットの特徴</a>
+    <a href="#screenshots">スクリーンショット</a>
+    <a href="#latest-update">最新の更新（8/14）</a>
+    <a href="#previous-update">前回の更新（8/11）</a>
+    <a href="#mirror-tool">ミラーツール</a>
+    <a href="#feedback">フィードバック</a>
+    <a href="https://github.com/ginsabo/self-stream-kit/releases/latest">ダウンロード ↗</a>
+  </nav>
+  <button type="button" class="page-toc-toggle" id="pageTocToggle" aria-expanded="false" aria-controls="pageToc">☰ 目次</button>
   <div class="container">
     <header>
       <div class="brand">
@@ -601,7 +696,7 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="top">
         <div>
           <p class="eyebrow">Stream on your own terms</p>
           <h1>自分のPCが、<br><span>配信サーバー</span>になる。</h1>
@@ -636,7 +731,7 @@
         </div>
       </section>
 
-      <section class="features">
+      <section class="features" id="features">
         <p class="eyebrow">Why self-stream-kit</p>
         <h2 class="section-title">配信に必要なものを、ひとつのキットに。</h2>
 
@@ -1092,7 +1187,7 @@
         </div>
       </section>
 
-      <section class="feedback">
+      <section class="feedback" id="feedback">
         <p class="eyebrow">Feedback</p>
         <h2 class="section-title">声を聞かせてください。</h2>
 
@@ -1136,5 +1231,50 @@
       <p>OBS × MediaMTX × Node.js × Windows</p>
     </footer>
   </div>
+
+  <script>
+    // 目次の開閉(狭い画面)と、今読んでいる項目の強調。これだけの補助なので、
+    // スクリプトが動かない環境でもリンクは普通のページ内リンクとして働く。
+    (() => {
+      "use strict";
+      const toc = document.getElementById("pageToc");
+      const toggle = document.getElementById("pageTocToggle");
+      if (!toc || !toggle) return;
+
+      toggle.addEventListener("click", () => {
+        const open = document.body.classList.toggle("toc-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      const links = [...toc.querySelectorAll('a[href^="#"]')];
+      // 項目を選んだら(狭い画面では)目次を畳む。飛び先が隠れるため。
+      for (const link of links) {
+        link.addEventListener("click", () => {
+          document.body.classList.remove("toc-open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      // 画面に入っている項目を強調する。複数入っている時は一番上を採る。
+      const sections = links
+        .map((link) => document.getElementById(link.hash.slice(1)))
+        .filter(Boolean);
+      const visible = new Set();
+      const highlight = () => {
+        const current = sections.find((section) => visible.has(section));
+        for (const link of links) {
+          link.classList.toggle("is-current", Boolean(current) && link.hash === `#${current.id}`);
+        }
+      };
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+        highlight();
+      }, { rootMargin: "-10% 0px -40% 0px" });
+      for (const section of sections) observer.observe(section);
+    })();
+  </script>
 </body>
 </html>
