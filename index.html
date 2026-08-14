@@ -776,6 +776,107 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">読み込みの「ぐるぐる」を、原因から潰しました。</h2>
+          <span class="release-date">2026年8月14日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>すべての版をご利用の方へ：</strong>
+          チャット欄が表示されているだけで映像の再生を圧迫する問題を複数特定し、まとめて解消しました。視聴中に読み込みの「ぐるぐる」が出やすい環境で特に効果があります。2026年8月14日版への更新を推奨します。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>金・虹装飾の常時アニメーションを廃止</h3>
+            <p>
+              チャットの金色・虹色装飾が、画面に見えている間じゅうチャット欄を描き直させていました。
+            </p>
+            <ul>
+              <li>装飾行が1行見えているだけで、毎秒60回の描き直しが走っていた</li>
+              <li>「チャット欄を隠すとぐるぐるが直る」報告の主因</li>
+              <li>流れる照りは、一番明るい瞬間で静止した表示へ（グラデーション・影・太字は維持）</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>リアクション一覧のGIFを静止画に</h3>
+            <p>
+              動くGIF・アニメWebPが登録されていると、一覧が見えている間ずっと映像と描画を取り合っていました。
+            </p>
+            <ul>
+              <li>一覧のサムネイルは最初の1コマだけの静止画へ変更</li>
+              <li>送ったリアクションが配信画面上で動く演出は、これまでどおり</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>通信が不安定な時のチャット表示を軽量化</h3>
+            <p>
+              接続が切れている間の履歴取得（2秒ごと）で、「そうだね」が1つ増えるだけでも最大300行を全部作り直していました。
+            </p>
+            <ul>
+              <li>既存の行を使い回し、増えた行と変わった数字だけを反映</li>
+              <li>Quick Tunnelなど接続が不安定な環境での、周期的な引っかかりを解消</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>空回りしていた常時処理を停止</h3>
+            <p>
+              誰も使っていない間も、全視聴者の画面で回り続けていた処理を止めました。
+            </p>
+            <ul>
+              <li>落書き機能：線が1本も無い間は、毎フレームの消去処理を待機</li>
+              <li>アンケート：残り時間は文字だけ書き換え（毎秒ボタンごと作り直していた）</li>
+              <li>投票ボタンが押す直前に入れ替わって押し損ねる問題も同時に解消</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>チャット処理の二重管理を解消（内部整理）</h3>
+            <p>
+              視聴ページと別窓チャットに同じ処理が二重に書かれ、修正が片方にしか入らない事故の温床になっていました。
+            </p>
+            <ul>
+              <li>共通部品（chat-shared.js）へ一本化。挙動は変えていません</li>
+              <li>使われていない古いコードも削除</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：840件すべて成功（今回の対策を固定する新設テストを含む）</li>
+                <li>チャット欄の負荷対策は、元に戻すとテストが失敗する形で契約化</li>
+                <li>更新・巻き戻しの模擬検証を含む自動テストで確認</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境で実施しています。実際の配信環境での効果確認は、今後の配信でのフィードバックをお待ちしています。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月11日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜8月11日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">回線に合わせて、画質が自動で切り替わります。</h2>
           <span class="release-date">2026年8月11日 更新</span>
         </div>
@@ -887,126 +988,8 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">見た目の崩れと、更新の詰まりをなくしました。</h2>
-          <span class="release-date">2026年8月7日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>2026年8月5日版をご利用の方へ：</strong>
-          ピン止めコメント表示時に入力欄が隠れる問題と、更新が途中で止まる複数の不具合を修正しました。2026年8月7日版への更新を推奨します。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>ピン止め表示で入力欄が隠れる問題を修正</h3>
-            <p>
-              長いコメントをピン止めして全文表示すると、コメント入力欄が画面の外へ押し出される問題を修正しました。
-            </p>
-            <ul>
-              <li>チャット上部の固定エリアに高さ上限と内部スクロールを追加</li>
-              <li>視聴ページと別窓チャットへ同じ表示制御を適用</li>
-              <li>スマートフォンの固定入力欄・幅の狭い別窓チャットでも操作範囲内に収まるよう修正</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>コメント文字数の上限を正しく反映</h3>
-            <p>
-              管理画面で設定した上限が視聴画面に反映されず、超過分が無言で切り捨てられる問題を修正しました。
-            </p>
-            <ul>
-              <li>設定した上限を視聴ページ・別窓チャットの入力欄へ反映</li>
-              <li>上限超過時はHTTP・WebSocketとも理由を表示して送信を拒否</li>
-              <li>無言での切り捨てを廃止</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>更新が途中で止まる問題を複数解消</h3>
-            <p>
-              環境によって更新が中止され、自動的に更新前の状態へ戻ってしまう問題を修正しました。
-            </p>
-            <ul>
-              <li>OBSプロファイルが無い環境、一部だけ変更した環境でも更新可能に</li>
-              <li><code>scripts</code>フォルダーへの追加ファイルが更新を妨げない</li>
-              <li>導入先の追加JS・CSS・独自テストが更新を妨げない</li>
-              <li>特定の文字コードによる配布直後だけの失敗を修正</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>更新結果の文字化けを解消</h3>
-            <p>
-              <code>APPLY_UPDATE.ps1</code>・<code>ROLLBACK_UPDATE.ps1</code>を直接実行した場合の日本語表示を修正しました。
-            </p>
-            <ul>
-              <li><strong>更新する.bat</strong>・<strong>もとに戻す.bat</strong>と同じ文字コード初期化を追加</li>
-              <li>PowerShellから直接実行しても日本語の結果を確認可能に</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>配布内容の確認をさらに強化</h3>
-            <p>
-              修正が一部の画面だけに反映されない事態や、配布物の欠落を防ぐ仕組みを追加しました。
-            </p>
-            <ul>
-              <li>全公開画面が同じ版の部品を読み込んでいるか自動確認</li>
-              <li>配布用・更新用・更新キットの3種ZIPすべてを相互照合</li>
-              <li>前回リリースとの差分から、廃止ファイルの分類漏れを自動検出</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>内部コードを整理</h3>
-            <p>
-              表には出ない部分の整理も行いました。
-            </p>
-            <ul>
-              <li>未使用の管理画面用CSSを削除</li>
-              <li>アーカイブ画面のID重複を解消</li>
-              <li>入力欄の処理を視聴ページ・別窓チャットで共通の部品へ統合</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性を確認</h3>
-              <ul>
-                <li>OBSプロファイルが無い2026年8月5日版環境への更新：成功</li>
-                <li>利用者追加ファイル・一部変更したOBSプロファイルがある環境への更新：成功</li>
-                <li>更新後テスト：787件すべて成功</li>
-                <li>管理コード・利用者データ・MediaMTX設定の差分：0</li>
-                <li>ロールバック：成功</li>
-              </ul>
-              <p class="release-note">
-                確認は隔離したローカル環境で実施しています。実OBS、実MediaMTX配信、実Cloudflare Tunnel、実スマートフォン、実Discord Webhookは利用者環境での確認が必要です。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月5日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版・8月4日版・8月5日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月5日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月7日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
 
