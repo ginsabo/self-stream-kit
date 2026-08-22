@@ -871,6 +871,122 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">リアクションが、探しやすく、鳴らしやすく。</h2>
+          <span class="release-date">2026年8月22日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>すべての版をご利用の方へ：</strong>
+          リアクションの整理（カテゴリ・名前の変更）と音量（50〜200%）・試聴の追加に加え、動画が20MBまで登録できない不具合を修正しました。2026年8月22日版への更新を推奨します。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>素材ごとの音量と、送る前の試聴</h3>
+            <p>
+              音声・動画リアクションの音量を素材ごとに50〜200%で設定できます。視聴者は送る前に手元で試聴し、その回だけ音量を選べます。
+            </p>
+            <ul>
+              <li>管理画面の編集欄で素材ごとに音量を設定（全体の音量に掛け合わせ）</li>
+              <li>視聴ページ・別窓に「▶ 試聴」（配信には出ません）と「送る音量」</li>
+              <li>100%超は配信画面側で増幅。OBSで動画の音量が反映されない問題にも対処</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>カテゴリで折り畳み</h3>
+            <p>
+              登録数が増えても目的のボタンを探せるよう、一覧をカテゴリごとに折り畳めるようにしました。
+            </p>
+            <ul>
+              <li>登録時にカテゴリ（任意）を付ける。既存のカテゴリは候補に出ます</li>
+              <li>未分類は「その他」にまとめて最後へ。開閉は端末ごとに記憶</li>
+              <li>カテゴリを付けていない配信は今までどおりの平らな一覧</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>ボタン名は必須、後から直せる</h3>
+            <p>
+              ボタン名が空欄だとファイル名が登録され、後から直せなかった問題を解消しました。
+            </p>
+            <ul>
+              <li>空欄では登録できません（送る前に案内が出ます）</li>
+              <li>管理画面から名前・カテゴリ・音量をいつでも変更可能</li>
+              <li>変更は見ている全員の一覧にその場で反映</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>管理画面の素材一覧を整理</h3>
+            <p>
+              「登録済みリアクション素材」に並び替え・束ね・プレビューを追加しました。
+            </p>
+            <ul>
+              <li>並び：追加が古い順・新しい順・名前順</li>
+              <li>カテゴリごとに束ねる（視聴ページと同じ並び）</li>
+              <li>各素材の「プレビュー」で画像・音声・動画の中身を確認</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>不具合の修正</h3>
+            <p>
+              リリース前の全ファイル監査で見つけた問題も合わせて直しました。
+            </p>
+            <ul>
+              <li>動画の登録が手元で5MBまでに制限されていた問題を修正（案内どおり20MBまで）</li>
+              <li>音声リアクションが鳴り終わった後の音の経路を毎回片付け、長時間配信での蓄積を防止</li>
+              <li>音量の内部処理を一本化</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>説明書の更新</h3>
+            <p>
+              機能説明書に今回の機能と注意点を追記しました。
+            </p>
+            <ul>
+              <li>ボタン名必須・カテゴリ・音量・試聴の使い方</li>
+              <li>管理画面の一覧整理（並び・束ね・プレビュー）</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：865件すべて成功</li>
+                <li>視聴ページ・別窓・管理画面・オーバーレイを実ブラウザで動作確認</li>
+                <li>リリース前に全ファイル監査を実施し、検出した問題を修正済み</li>
+                <li>ロールバック：成功</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境に加え、実OBS・実MediaMTXを使った配信者の実環境でも実施しています。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月14日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜8月14日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">読み込みの「ぐるぐる」を、原因から潰しました。</h2>
           <span class="release-date">2026年8月14日 更新</span>
         </div>
@@ -966,127 +1082,12 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">回線に合わせて、画質が自動で切り替わります。</h2>
-          <span class="release-date">2026年8月11日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>すべての版をご利用の方へ：</strong>
-          視聴画質の自動切替（ABR）の追加をはじめ、再生の立て直し・エコー対策・導入の自動化など大きな改善を行いました。2026年8月11日版への更新を推奨します。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>自動画質（ABR）を追加</h3>
-            <p>
-              H264配信で画質「自動」を選ぶと、視聴者ごとの回線の太さに合わせて高画質と軽画質を自動で行き来します。
-            </p>
-            <ul>
-              <li>回線が細くなると自動で軽画質へ、回復すると自動で高画質へ</li>
-              <li>視聴者の操作は不要。切替はほとんど気づかれません</li>
-              <li>対象は「低画質の生成」ONのH264配信。HEVC配信は従来の自動選択</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>MediaMTXを自動で用意</h3>
-            <p>
-              FFmpegと同じように、MediaMTXも番号batで自動導入できるようになりました。
-            </p>
-            <ul>
-              <li><strong>5_MediaMTXを用意する.bat</strong>が動作確認済みの版を自動導入</li>
-              <li>既存の設定（mediamtx.yml）は決して上書きしない</li>
-              <li>壊れたexe・設定だけが消えた環境も自動で修復</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>再生の立て直しを強化</h3>
-            <p>
-              視聴が苦しくなったときに、ぐるぐるを見せ続けない仕組みを追加しました。
-            </p>
-            <ul>
-              <li>音は流れるのに映像だけ凍る故障を自動検出し、3段階で自動復旧</li>
-              <li>読み込みが追いつかない視聴者を自動で一段軽い画質へ</li>
-              <li>映像の保持時間を約7秒から約20秒へ拡大</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>読み込みと画質切替を高速化</h3>
-            <p>
-              「再接続を押した方が早い」と言われる待ち時間をなくしました。
-            </p>
-            <ul>
-              <li>読み込みの再試行間隔を短縮（0.5〜2秒で粘る方式へ）</li>
-              <li>軽画質への切替は変換の準備完了を待ってから実行（切替失敗で元へ戻される問題を解消）</li>
-              <li>配信開始直後に画質が勝手に切り替わる問題を修正</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>エコー対策</h3>
-            <p>
-              「音が二重に聞こえる」報告の原因を2系統とも塞ぎました。
-            </p>
-            <ul>
-              <li>ポップアップ視聴時は元ページの再生を自動停止（二重再生を解消）</li>
-              <li>OBSが音声を複数トラックで送っている場合は管理画面へ警告</li>
-              <li>チャットの受付を一時停止できる機能も追加</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>画面と説明書の改善</h3>
-            <p>
-              細かな引っかかりも合わせて解消しました。
-            </p>
-            <ul>
-              <li>ウィンドウ内全画面でも画質メニュー・落書き・スクショを利用可能に</li>
-              <li>全画面・シアター切替後にツールバーが消えなくなる問題を修正</li>
-              <li>更新手順の説明を<strong>更新する.bat</strong>へ統一。publicフォルダーが公開される旨や、独自追加ファイルの更新時の扱いも明記</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性と品質確認</h3>
-              <ul>
-                <li>更新後テスト：832件すべて成功</li>
-                <li>外部AI監査を3巡実施し、指摘（High 1件・Medium 10件）をすべて修正</li>
-                <li>最終監査判定：「Critical 0 / High 0 / Medium 0・配布可」</li>
-                <li>ロールバック：成功</li>
-              </ul>
-              <p class="release-note">
-                確認は隔離したローカル環境に加え、実OBS・実MediaMTX・実スマートフォンを使った配信者の実環境でも実施しています。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月7日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版〜8月7日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月7日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月11日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
+
+
 
 
 
