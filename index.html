@@ -888,6 +888,123 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">全画面のまま、チャットも一緒に。</h2>
+          <span class="release-date">2026年8月27日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>すべての版をご利用の方へ：</strong>
+          視聴者からの不具合報告をもとに、映像の遅れが戻らなくなる問題と、見えているのに「再生できませんでした」と出る問題を修正しました。2026年8月27日版への更新を推奨します。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>全画面でもチャットが使えます</h3>
+            <p>
+              「全画面」ボタンで映像が画面いっぱいになり、右端にカーソルを寄せるとチャット欄が出てきます。そのままコメントもリアクションも送れます。
+            </p>
+            <ul>
+              <li>カーソルが離れると消えるので、普段は映像だけ</li>
+              <li>タブレットは右端をタップ、キーボードはTabキーで開く</li>
+              <li>動画プレイヤー右下の全画面（⛶）もこちらへ自動で切り替え</li>
+              <li>iPhoneとスマホの縦画面は仕組み上、対応できません</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>リアクションのタブが付いてきます</h3>
+            <p>
+              画像・音声・動画のタブが、一覧をスクロールしても上に貼り付いたままになります。
+            </p>
+            <ul>
+              <li>下の方から別のタブへ移るのに、上まで戻る必要なし</li>
+              <li>視聴ページとチャット別窓の両方</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>誤った「再生できませんでした」を修正</h3>
+            <p>
+              一番軽い画質で回線が苦しいとき、普通に見えているのに最終エラーが出ていました。
+            </p>
+            <ul>
+              <li>「回線が追いつかず映像が不安定です」の案内に変更</li>
+              <li>安定すれば自動で消えます</li>
+              <li>その間、視聴者数からその人が消える問題も解消</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>遅れが伸びっぱなしになる問題に対処</h3>
+            <p>
+              狙い6秒に対して80秒以上遅れたまま戻らない状態を、キットが検知できていませんでした。
+            </p>
+            <ul>
+              <li>遅れが大きくなりすぎたら自動で配信の先端へ追いつき直します</li>
+              <li>枯れきった視聴者ほど軽い画質へ落ちなかった穴も修正</li>
+              <li>作動した回数は管理画面のメトリクスで確認できます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>互換高画質のビットレートを表へ</h3>
+            <p>
+              HEVCで配信する方に関わる大事な設定が「詳細設定」に埋もれていて、気づけませんでした。
+            </p>
+            <ul>
+              <li>折り畳みの外に出し、名前と説明を分かりやすく</li>
+              <li>OBSの設定より大きすぎる場合は管理画面が警告します</li>
+              <li>大きすぎると画質は上がらず、送信量だけ増えて全員の回線を圧迫します</li>
+              <li>軽画質についても同じ警告が出ます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>管理画面の視聴状況の集計を修正</h3>
+            <p>
+              どの画質を誰が見ているかが、すべて「unknown」に集計されていました。
+            </p>
+            <ul>
+              <li>画質ごとの視聴状況が正しく見えるようになりました</li>
+              <li>遅れの自動復帰の回数も新たに確認できます</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：901件すべて成功</li>
+                <li>視聴ページ・別窓・管理画面・オーバーレイを実ブラウザで動作確認</li>
+                <li>リリース前に多角的な監査（6系統のレビュー＋所見ごとの再検証）を実施し、検出した問題はすべて修正済み</li>
+                <li>ロールバック：成功</li>
+              </ul>
+              <p class="release-note">
+                確認は隔離したローカル環境に加え、実OBS・実MediaMTXを使った配信者の実環境でも実施しています。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月22日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜8月22日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">リアクションが、探しやすく、鳴らしやすく。</h2>
           <span class="release-date">2026年8月22日 更新</span>
         </div>
@@ -998,111 +1115,12 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">読み込みの「ぐるぐる」を、原因から潰しました。</h2>
-          <span class="release-date">2026年8月14日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>すべての版をご利用の方へ：</strong>
-          チャット欄が表示されているだけで映像の再生を圧迫する問題を複数特定し、まとめて解消しました。視聴中に読み込みの「ぐるぐる」が出やすい環境で特に効果があります。2026年8月14日版への更新を推奨します。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>金・虹装飾の常時アニメーションを廃止</h3>
-            <p>
-              チャットの金色・虹色装飾が、画面に見えている間じゅうチャット欄を描き直させていました。
-            </p>
-            <ul>
-              <li>装飾行が1行見えているだけで、毎秒60回の描き直しが走っていた</li>
-              <li>「チャット欄を隠すとぐるぐるが直る」報告の主因</li>
-              <li>流れる照りは、一番明るい瞬間で静止した表示へ（グラデーション・影・太字は維持）</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>リアクション一覧のGIFを静止画に</h3>
-            <p>
-              動くGIF・アニメWebPが登録されていると、一覧が見えている間ずっと映像と描画を取り合っていました。
-            </p>
-            <ul>
-              <li>一覧のサムネイルは最初の1コマだけの静止画へ変更</li>
-              <li>送ったリアクションが配信画面上で動く演出は、これまでどおり</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>通信が不安定な時のチャット表示を軽量化</h3>
-            <p>
-              接続が切れている間の履歴取得（2秒ごと）で、「そうだね」が1つ増えるだけでも最大300行を全部作り直していました。
-            </p>
-            <ul>
-              <li>既存の行を使い回し、増えた行と変わった数字だけを反映</li>
-              <li>Quick Tunnelなど接続が不安定な環境での、周期的な引っかかりを解消</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>空回りしていた常時処理を停止</h3>
-            <p>
-              誰も使っていない間も、全視聴者の画面で回り続けていた処理を止めました。
-            </p>
-            <ul>
-              <li>落書き機能：線が1本も無い間は、毎フレームの消去処理を待機</li>
-              <li>アンケート：残り時間は文字だけ書き換え（毎秒ボタンごと作り直していた）</li>
-              <li>投票ボタンが押す直前に入れ替わって押し損ねる問題も同時に解消</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>チャット処理の二重管理を解消（内部整理）</h3>
-            <p>
-              視聴ページと別窓チャットに同じ処理が二重に書かれ、修正が片方にしか入らない事故の温床になっていました。
-            </p>
-            <ul>
-              <li>共通部品（chat-shared.js）へ一本化。挙動は変えていません</li>
-              <li>使われていない古いコードも削除</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性と品質確認</h3>
-              <ul>
-                <li>更新後テスト：840件すべて成功（今回の対策を固定する新設テストを含む）</li>
-                <li>チャット欄の負荷対策は、元に戻すとテストが失敗する形で契約化</li>
-                <li>更新・巻き戻しの模擬検証を含む自動テストで確認</li>
-              </ul>
-              <p class="release-note">
-                確認は隔離したローカル環境で実施しています。実際の配信環境での効果確認は、今後の配信でのフィードバックをお待ちしています。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月11日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版〜8月11日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月11日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月14日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
+
+
 
 
 
