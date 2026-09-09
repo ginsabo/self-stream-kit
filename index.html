@@ -694,8 +694,8 @@
     <a href="#top">トップ</a>
     <a href="#features">キットの特徴</a>
     <a href="#screenshots">スクリーンショット</a>
-    <a href="#latest-update">最新の更新（8/29）</a>
-    <a href="#previous-update">前回の更新（8/27）</a>
+    <a href="#latest-update">最新の更新（9/10）</a>
+    <a href="#previous-update">前回の更新（8/29）</a>
     <a href="#mirror-tool">ミラーツール</a>
     <a href="#feedback">フィードバック</a>
     <a href="https://github.com/ginsabo/self-stream-kit/releases/latest">ダウンロード ↗</a>
@@ -888,6 +888,110 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">頂いた要望、4つまとめて入りました。</h2>
+          <span class="release-date">2026年9月10日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>ご要望・ご報告ありがとうございます：</strong>
+          今回はいただいた要望4件（アンケートの整理・リアクションの大きさ・配信時間の表示）の実装が中心です。「リアクション追加で配信が一瞬止まる」というご報告の原因も特定しました。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>アンケート履歴を削除できます</h3>
+            <p>
+              管理画面の「過去のアンケート」に、1件ずつの「削除」と「履歴を全部削除」が付きました。
+            </p>
+            <ul>
+              <li>履歴が増えて管理画面が縦長になってきた、というご要望への対応</li>
+              <li>全部削除は確認ダイアログ付き</li>
+              <li>ファイルの手編集は不要になりました（稼働中の手編集は巻き戻る罠がありました）</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>アンケート結果を自動で閉じられます</h3>
+            <p>
+              「結果の自動クローズ（分）」を設定すると、終了から指定分で視聴ページの結果表示が自動的に畳まれます。
+            </p>
+            <ul>
+              <li>0のままなら今までどおり手動のみ</li>
+              <li>視聴者が自分で閉じた場合はそちらが優先</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>リアクションの大きさを個別に抑えられます</h3>
+            <p>
+              画像・動画の素材ごとに、表示サイズの上限（横%・縦%）を決められます。
+            </p>
+            <ul>
+              <li>「結構でかく表示されるやつがある」というご要望への対応</li>
+              <li>標準の大きさへの縮小率として効きます（10〜100%）</li>
+              <li>空欄や100で標準のまま。標準より大きくはできません</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>いつから配信しているかが見えます</h3>
+            <p>
+              視聴ページ上部が「配信中（YYYY/MM/DD hh:mm から）」になりました。
+            </p>
+            <ul>
+              <li>毎秒数える動的カウントはあえてせず、映像の描画を邪魔しない静的表示</li>
+              <li>OBSの数分以内の切断→再接続では開始時刻は変わりません</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>「追加で配信が止まる」の原因を特定</h3>
+            <p>
+              リアクションを誰かが追加した際に配信が一瞬止まる、というご報告の原因です。
+            </p>
+            <ul>
+              <li>8月27日版まで、素材のサムネイルは毎回取り直しの設定でした</li>
+              <li>追加のたびに全視聴者が全サムネイルを再取得し、配信と回線を奪い合っていました</li>
+              <li>8月29日版で素材が保存可になり、解消済みの見込みです</li>
+              <li>8月29日版以降でも出る場合は、ぜひもう一度お知らせください</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：1010件すべて成功</li>
+                <li>8月29日版からの更新：成功（設定・素材・録画・コメント履歴を保持）</li>
+                <li>ロールバック：成功（差分0件）</li>
+                <li>新機能は壊し方を1つずつ試し、検査が赤くなることまで確認（計13通り）</li>
+              </ul>
+              <p class="release-note">
+                リリース前に多角的な監査（観点別のレビュー＋所見ごとの敵対的検証）を実施し、検出した問題はすべて修正済みです。
+              </p>
+            </div>
+
+            <div>
+              <h3>8月29日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ（進み具合が表示されます）</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜8月29日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">鳴らしたい所だけを、鳴らせます。</h2>
           <span class="release-date">2026年8月29日 更新</span>
         </div>
@@ -1013,125 +1117,8 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">全画面のまま、チャットも一緒に。</h2>
-          <span class="release-date">2026年8月27日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>すべての版をご利用の方へ：</strong>
-          視聴者からの不具合報告をもとに、映像の遅れが戻らなくなる問題と、見えているのに「再生できませんでした」と出る問題を修正しました。2026年8月27日版への更新を推奨します。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>全画面でもチャットが使えます</h3>
-            <p>
-              「全画面」ボタンで映像が画面いっぱいになり、右端にカーソルを寄せるとチャット欄が出てきます。そのままコメントもリアクションも送れます。
-            </p>
-            <ul>
-              <li>カーソルが離れると消えるので、普段は映像だけ</li>
-              <li>タブレットは右端をタップ、キーボードはTabキーで開く</li>
-              <li>動画プレイヤー右下の全画面（⛶）もこちらへ自動で切り替え</li>
-              <li>iPhoneとスマホの縦画面は仕組み上、対応できません</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>リアクションのタブが付いてきます</h3>
-            <p>
-              画像・音声・動画のタブが、一覧をスクロールしても上に貼り付いたままになります。
-            </p>
-            <ul>
-              <li>下の方から別のタブへ移るのに、上まで戻る必要なし</li>
-              <li>視聴ページとチャット別窓の両方</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>誤った「再生できませんでした」を修正</h3>
-            <p>
-              一番軽い画質で回線が苦しいとき、普通に見えているのに最終エラーが出ていました。
-            </p>
-            <ul>
-              <li>「回線が追いつかず映像が不安定です」の案内に変更</li>
-              <li>安定すれば自動で消えます</li>
-              <li>その間、視聴者数からその人が消える問題も解消</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>遅れが伸びっぱなしになる問題に対処</h3>
-            <p>
-              狙い6秒に対して80秒以上遅れたまま戻らない状態を、キットが検知できていませんでした。
-            </p>
-            <ul>
-              <li>遅れが大きくなりすぎたら自動で配信の先端へ追いつき直します</li>
-              <li>枯れきった視聴者ほど軽い画質へ落ちなかった穴も修正</li>
-              <li>作動した回数は管理画面のメトリクスで確認できます</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>互換高画質のビットレートを表へ</h3>
-            <p>
-              HEVCで配信する方に関わる大事な設定が「詳細設定」に埋もれていて、気づけませんでした。
-            </p>
-            <ul>
-              <li>折り畳みの外に出し、名前と説明を分かりやすく</li>
-              <li>OBSの設定より大きすぎる場合は管理画面が警告します</li>
-              <li>大きすぎると画質は上がらず、送信量だけ増えて全員の回線を圧迫します</li>
-              <li>軽画質についても同じ警告が出ます</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>管理画面の視聴状況の集計を修正</h3>
-            <p>
-              どの画質を誰が見ているかが、すべて「unknown」に集計されていました。
-            </p>
-            <ul>
-              <li>画質ごとの視聴状況が正しく見えるようになりました</li>
-              <li>遅れの自動復帰の回数も新たに確認できます</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性と品質確認</h3>
-              <ul>
-                <li>更新後テスト：901件すべて成功</li>
-                <li>視聴ページ・別窓・管理画面・オーバーレイを実ブラウザで動作確認</li>
-                <li>リリース前に多角的な監査（6系統のレビュー＋所見ごとの再検証）を実施し、検出した問題はすべて修正済み</li>
-                <li>ロールバック：成功</li>
-              </ul>
-              <p class="release-note">
-                確認は隔離したローカル環境に加え、実OBS・実MediaMTXを使った配信者の実環境でも実施しています。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月22日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版〜8月22日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月22日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月27日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
 
