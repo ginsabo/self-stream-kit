@@ -694,8 +694,8 @@
     <a href="#top">トップ</a>
     <a href="#features">キットの特徴</a>
     <a href="#screenshots">スクリーンショット</a>
-    <a href="#latest-update">最新の更新（9/10）</a>
-    <a href="#previous-update">前回の更新（8/29）</a>
+    <a href="#latest-update">最新の更新（10/28）</a>
+    <a href="#previous-update">前回の更新（9/10）</a>
     <a href="#mirror-tool">ミラーツール</a>
     <a href="#feedback">フィードバック</a>
     <a href="https://github.com/ginsabo/self-stream-kit/releases/latest">ダウンロード ↗</a>
@@ -888,6 +888,119 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">盛り上げて、片付けやすく。</h2>
+          <span class="release-date">2026年10月28日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>ご要望ありがとうございます：</strong>
+          いただいた要望6件をまとめて入れました。チアーとレイド通知で盛り上げつつ、増えたリアクション素材を整理・削除・復元しやすくしています。どれも配信者のPCや回線の負担を増やさない作りです。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>なんちゃってチアー</h3>
+            <p>
+              数字と桁（京・垓・秭）を選んで押すと、配信画面とチャットに「○○さんが 1919垓チアー！」と出ます。
+            </p>
+            <ul>
+              <li>お金は一切かかりません。本物には見えない冗談の応援です</li>
+              <li>空欄ならおまかせ。1人10分に1回まで</li>
+              <li>管理画面で受け付けをやめられます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>レイドを受けた側にも知らせ</h3>
+            <p>
+              レイドで視聴者が来ると「○○さんが ○人でレイドしてきました！」とチャットと配信画面に出ます（Twitch式）。
+            </p>
+            <ul>
+              <li>人数は実際に到着した人数を数えて出します</li>
+              <li>2人未満のときは出ません</li>
+              <li>送る側・受ける側の両方がこの版以降のときに動きます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>画像はホバーで大きく</h3>
+            <p>
+              一覧の画像にマウスを乗せると大きく見えます。
+            </p>
+            <ul>
+              <li>手元に読み込み済みの絵を使うので、配信者の回線は使いません</li>
+              <li>音声・動画は今までどおり▶で試聴</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>自分の素材は自分で消せる</h3>
+            <p>
+              一覧の自分が上げた素材にだけ「×」が付きます。本人かどうかはサーバーが照合します。
+            </p>
+            <ul>
+              <li>Cookieを消した後や別の端末からは消せません</li>
+              <li>この版より前に上げた素材は対象外です</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>削除はいったんごみ箱へ</h3>
+            <p>
+              どこで消した素材も「削除した素材」欄に入り、中身を確かめて戻せます。
+            </p>
+            <ul>
+              <li>「戻す」で元の設定のまま復活、「完全に削除」で消去</li>
+              <li>30日（変更可）を過ぎると自動で空きます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>使っていない素材を整理</h3>
+            <p>
+              素材一覧に「最終使用：○日前」が出ます。○日以上使われていない素材にまとめてチェックして整理できます。
+            </p>
+            <ul>
+              <li>消す前に必ず中身を確かめられます（自動では消しません）</li>
+              <li>最終使用は更新した時点から数え始めます</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：1027件すべて成功</li>
+                <li>9月10日版からの更新：成功（設定・素材・コメント履歴を保持）</li>
+                <li>ロールバック：成功</li>
+                <li>新機能は壊し方を1つずつ試し、検査が赤くなることまで確認（計24通り）</li>
+              </ul>
+              <p class="release-note">
+                その過程で見つけた「印の無い素材を、同じく印の無い人が消せてしまう」穴は、出荷前に塞ぎました。
+              </p>
+            </div>
+
+            <div>
+              <h3>9月10日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ（進み具合が表示されます）</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜9月10日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">頂いた要望、4つまとめて入りました。</h2>
           <span class="release-date">2026年9月10日 更新</span>
         </div>
@@ -986,139 +1099,8 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">鳴らしたい所だけを、鳴らせます。</h2>
-          <span class="release-date">2026年8月29日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>すべての版をご利用の方へ：</strong>
-          一部の視聴者だけが永久に映像を受け取れなくなる不具合と、更新が「更新しています」のまま進まなくなる問題を修正しました。2026年8月29日版への更新を推奨します。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>リアクションに再生区間を決められます</h3>
-            <p>
-              音声・動画リアクションに、素材ごとの「開始秒」「終了秒」を入れられるようになりました。10秒の動画で「2秒地点から7秒地点まで」といった指定ができます。
-            </p>
-            <ul>
-              <li>空欄なら今までどおり最初から最後まで</li>
-              <li>編集欄に素材の長さが出るので、目安を見ながら決められます</li>
-              <li>終わり際は短く薄れて止まるので、ぶつ切りになりません</li>
-              <li>視聴者の試聴も管理画面のプレビューも同じ区間で鳴ります</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>チャットを畳んだ状態で見せられます</h3>
-            <p>
-              管理画面の「初期表示」で、視聴ページを初めて開いた人にはチャット欄を畳んで見せられます。
-            </p>
-            <ul>
-              <li>視聴者が自分で開閉したら、その選択が端末ごとに記憶されて優先されます</li>
-              <li>毎回問答無用で畳むと、見たい人が毎回開き直すことになるためです</li>
-              <li>スマホの縦画面はもともと畳まれた表示のため対象外です</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>貼ると、カードで表示されます</h3>
-            <p>
-              DiscordやXに配信ページのURLを貼ると、タイトル・説明・サムネイル付きのカードで表示されます。
-            </p>
-            <ul>
-              <li>出るのは視聴ページとアーカイブページだけです</li>
-              <li>中身は配信者の設定そのまま（タイトル／概要欄／サムネイル）</li>
-              <li>更新後に管理画面の「公開URL」と「サムネイル画像」をご確認ください</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>OBSに置ける部品を同梱しました</h3>
-            <p>
-              日時ウィジェットをキット直下に入れました。OBSのブラウザソースに指定するだけで使えます。
-            </p>
-            <ul>
-              <li>外部へ通信せず、キット本体も使わない単体のHTML</li>
-              <li>色は先頭の数行を書き換えれば変えられます</li>
-              <li>重ね表示（オーバーレイ）の入れ方も説明書に追記しました</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>「自分だけ見られない」を修正</h3>
-            <p>
-              視聴者からの実報告です。「他の人は見られるのに自分だけぐるぐるしたまま」という症状でした。
-            </p>
-            <ul>
-              <li>配信の再開で古い視聴セッションが無効になると、そのブラウザだけ断られ続けます</li>
-              <li>一度この状態に入ると、視聴者は自力では抜け出せませんでした</li>
-              <li>断られたらキットが一度だけ取り直すようにしました。視聴者側の操作は要りません</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>MediaMTXの新しい版に対応</h3>
-            <p>
-              実際に MediaMTX 1.20.1 を入れて、視聴できるところまで確認しました。キットは新しい版と互換で、壊れるのは1点だけでした。
-            </p>
-            <ul>
-              <li>更新前から見ていた人だけが見られなくなる、という紛らわしい出方をします</li>
-              <li>版に関係なく同じ方式で動くようにしました</li>
-              <li>管理画面の「詳細診断」で、番号ではなく“働いているか”を確かめられます</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>更新が止まらなくなりました</h3>
-            <p>
-              配信者の実環境で、更新が3時間20分止まりました。動いていたのではなく完全な停止です。
-            </p>
-            <ul>
-              <li>更新そのものに制限時間（30分）を付けました</li>
-              <li>超えたら自分で打ち切り、中身を元に戻して理由を表示します</li>
-              <li>処理中は1分ごとに「まだ動いています（○分経過）」と出ます</li>
-              <li>public に置いた自分のバックアップで更新が失敗する問題も修正</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性と品質確認</h3>
-              <ul>
-                <li>更新後テスト：997件すべて成功</li>
-                <li>自分のファイルを置いたままの更新：成功（ファイルは変更されず残ります）</li>
-                <li>新規導入：成功（全画面の応答を確認）</li>
-                <li>ロールバック：成功（差分0件）</li>
-              </ul>
-              <p class="release-note">
-                リリース前に多角的な監査（観点別のレビュー＋所見ごとの敵対的検証）を複数回実施し、検出した問題はすべて修正済みです。確認は隔離したローカル環境に加え、実OBS・実MediaMTXを使った配信者の実環境でも実施しています。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月27日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ（進み具合が表示されます）</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版〜8月27日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月27日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年8月29日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
 
