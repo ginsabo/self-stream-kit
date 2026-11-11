@@ -694,8 +694,8 @@
     <a href="#top">トップ</a>
     <a href="#features">キットの特徴</a>
     <a href="#screenshots">スクリーンショット</a>
-    <a href="#latest-update">最新の更新（10/28）</a>
-    <a href="#previous-update">前回の更新（9/10）</a>
+    <a href="#latest-update">最新の更新（11/11）</a>
+    <a href="#previous-update">前回の更新（10/28）</a>
     <a href="#mirror-tool">ミラーツール</a>
     <a href="#feedback">フィードバック</a>
     <a href="https://github.com/ginsabo/self-stream-kit/releases/latest">ダウンロード ↗</a>
@@ -888,6 +888,71 @@
         <p class="eyebrow">Latest update</p>
 
         <div class="release-header">
+          <h2 class="section-title">配信を、途中で止めない。</h2>
+          <span class="release-date">2026年11月11日 更新</span>
+        </div>
+
+        <p class="release-alert">
+          <strong>すべての版をご利用の方へ：</strong>
+          配信中にキットが急に終了し、配信がオフラインになることがある不具合を修正しました。2026年11月11日版への更新をおすすめします。
+        </p>
+
+        <div class="release-grid">
+          <article class="release-card">
+            <h3>配信中に終了する問題を修正</h3>
+            <p>
+              しばらく配信していると「EBUSY: resource busy or locked」というエラーでキットが終了することがありました（ご報告ありがとうございます）。
+            </p>
+            <ul>
+              <li>原因は、ほかのソフトがログファイルを一瞬つかんだときの読み込みエラー</li>
+              <li>今後は少し待って読み直し、配信は止めません</li>
+              <li>読めなかった分も、あとでまとめて追いつきます</li>
+            </ul>
+          </article>
+
+          <article class="release-card">
+            <h3>チアーに効果音</h3>
+            <p>
+              チアーの知らせが配信画面に出るときに、キラッと上がる短い効果音が鳴ります。
+            </p>
+            <ul>
+              <li>その場で合成するので、配信者の回線は使いません</li>
+              <li>音量は「音声リアクション音量」に合わせます（0なら無音）</li>
+            </ul>
+          </article>
+
+          <article class="release-card release-card-wide">
+            <div>
+              <h3>更新互換性と品質確認</h3>
+              <ul>
+                <li>更新後テスト：1035件すべて成功</li>
+                <li>不具合は10月28日版で再現を確認してから修正</li>
+                <li>10月28日版からの更新：成功</li>
+                <li>ロールバック：成功</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>10月28日版以前からの更新方法</h3>
+              <ol>
+                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
+                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
+                <li><strong>更新する.bat</strong>を実行する</li>
+                <li>処理中は窓を閉じずに待つ（進み具合が表示されます）</li>
+                <li>「Update completed」と表示されたら完了</li>
+              </ol>
+              <p class="release-note">
+                2026年7月30日版〜10月28日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="release" id="previous-update">
+        <p class="eyebrow">Previous update</p>
+
+        <div class="release-header">
           <h2 class="section-title">盛り上げて、片付けやすく。</h2>
           <span class="release-date">2026年10月28日 更新</span>
         </div>
@@ -995,112 +1060,8 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="release" id="previous-update">
-        <p class="eyebrow">Previous update</p>
-
-        <div class="release-header">
-          <h2 class="section-title">頂いた要望、4つまとめて入りました。</h2>
-          <span class="release-date">2026年9月10日 更新</span>
-        </div>
-
-        <p class="release-alert">
-          <strong>ご要望・ご報告ありがとうございます：</strong>
-          今回はいただいた要望4件（アンケートの整理・リアクションの大きさ・配信時間の表示）の実装が中心です。「リアクション追加で配信が一瞬止まる」というご報告の原因も特定しました。
-        </p>
-
-        <div class="release-grid">
-          <article class="release-card">
-            <h3>アンケート履歴を削除できます</h3>
-            <p>
-              管理画面の「過去のアンケート」に、1件ずつの「削除」と「履歴を全部削除」が付きました。
-            </p>
-            <ul>
-              <li>履歴が増えて管理画面が縦長になってきた、というご要望への対応</li>
-              <li>全部削除は確認ダイアログ付き</li>
-              <li>ファイルの手編集は不要になりました（稼働中の手編集は巻き戻る罠がありました）</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>アンケート結果を自動で閉じられます</h3>
-            <p>
-              「結果の自動クローズ（分）」を設定すると、終了から指定分で視聴ページの結果表示が自動的に畳まれます。
-            </p>
-            <ul>
-              <li>0のままなら今までどおり手動のみ</li>
-              <li>視聴者が自分で閉じた場合はそちらが優先</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>リアクションの大きさを個別に抑えられます</h3>
-            <p>
-              画像・動画の素材ごとに、表示サイズの上限（横%・縦%）を決められます。
-            </p>
-            <ul>
-              <li>「結構でかく表示されるやつがある」というご要望への対応</li>
-              <li>標準の大きさへの縮小率として効きます（10〜100%）</li>
-              <li>空欄や100で標準のまま。標準より大きくはできません</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>いつから配信しているかが見えます</h3>
-            <p>
-              視聴ページ上部が「配信中（YYYY/MM/DD hh:mm から）」になりました。
-            </p>
-            <ul>
-              <li>毎秒数える動的カウントはあえてせず、映像の描画を邪魔しない静的表示</li>
-              <li>OBSの数分以内の切断→再接続では開始時刻は変わりません</li>
-            </ul>
-          </article>
-
-          <article class="release-card">
-            <h3>「追加で配信が止まる」の原因を特定</h3>
-            <p>
-              リアクションを誰かが追加した際に配信が一瞬止まる、というご報告の原因です。
-            </p>
-            <ul>
-              <li>8月27日版まで、素材のサムネイルは毎回取り直しの設定でした</li>
-              <li>追加のたびに全視聴者が全サムネイルを再取得し、配信と回線を奪い合っていました</li>
-              <li>8月29日版で素材が保存可になり、解消済みの見込みです</li>
-              <li>8月29日版以降でも出る場合は、ぜひもう一度お知らせください</li>
-            </ul>
-          </article>
-
-          <article class="release-card release-card-wide">
-            <div>
-              <h3>更新互換性と品質確認</h3>
-              <ul>
-                <li>更新後テスト：1010件すべて成功</li>
-                <li>8月29日版からの更新：成功（設定・素材・録画・コメント履歴を保持）</li>
-                <li>ロールバック：成功（差分0件）</li>
-                <li>新機能は壊し方を1つずつ試し、検査が赤くなることまで確認（計13通り）</li>
-              </ul>
-              <p class="release-note">
-                リリース前に多角的な監査（観点別のレビュー＋所見ごとの敵対的検証）を実施し、検出した問題はすべて修正済みです。
-              </p>
-            </div>
-
-            <div>
-              <h3>8月29日版以前からの更新方法</h3>
-              <ol>
-                <li><strong>2_配信をとめる.bat</strong>で配信を止める</li>
-                <li>「自鯖配信キット_更新」フォルダーを配信キット内に置く</li>
-                <li><strong>更新する.bat</strong>を実行する</li>
-                <li>処理中は窓を閉じずに待つ（進み具合が表示されます）</li>
-                <li>「Update completed」と表示されたら完了</li>
-              </ol>
-              <p class="release-note">
-                2026年7月30日版〜8月29日版のいずれからも、同じ手順で更新できます。設定・パスワード・素材・録画・コメント履歴・OBSプロファイルの変更内容は引き継がれます。更新後はOBSのブラウザソースで「現在のページのキャッシュを更新」をしておくと確実です。
-              </p>
-            </div>
-          </article>
-        </div>
         <p class="release-archive-link">
-          2026年8月29日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
+          2026年9月10日以前の更新内容は<a href="https://github.com/ginsabo/self-stream-kit/releases">リリース一覧</a>でご確認いただけます。
         </p>
       </section>
 
